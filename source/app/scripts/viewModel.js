@@ -17,6 +17,7 @@
 					self.toggleStartDock();
 				}
 			},1500);
+			// TODO : Adjust to proper time
 		};
 
 		self.toggleStartDock = function(){
