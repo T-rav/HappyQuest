@@ -1,0 +1,27 @@
+<?xml version="1.0"?><svg width="765" height="990" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <metadata id="metadata4076">LongswordweapontoolNicu BuculeiNicu BuculeiNicu Buculeiimage/svg+xmlen</metadata>
+ <defs>
+  <linearGradient id="linearGradient1557">
+   <stop stop-color="black" stop-opacity="0.546392" offset="0" id="stop1558"/>
+   <stop stop-color="black" stop-opacity="0" offset="1" id="stop1559"/>
+  </linearGradient>
+  <linearGradient id="linearGradient1554">
+   <stop stop-color="#000000" stop-opacity="0.224719" offset="0" id="stop1555"/>
+   <stop stop-color="#000000" stop-opacity="0.494118" offset="0.5" id="stop1560"/>
+   <stop stop-color="#000000" stop-opacity="0.188235" offset="1" id="stop1556"/>
+  </linearGradient>
+  <linearGradient id="linearGradient8383">
+   <stop stop-color="#ffffff" stop-opacity="0.797753" offset="0" id="stop8384"/>
+   <stop stop-color="#ffffff" stop-opacity="0.191011" offset="1" id="stop8385"/>
+  </linearGradient>
+  <linearGradient y2="0.5" x2="0.326311" y1="0.5" x1="-0.003155" id="linearGradient14221" xlink:href="#linearGradient1557"/>
+  <linearGradient y2="0.5" x2="0.673689" y1="0.5" x1="1.003155" id="linearGradient14225" xlink:href="#linearGradient1557"/>
+  <linearGradient y2="0.99456" x2="0.989224" y1="0.00543" x1="-0.016723" id="linearGradient14253" xlink:href="#linearGradient8383"/>
+  <linearGradient y2="0.99456" x2="0.989224" y1="0.00543" x1="-0.016723" id="linearGradient14255" xlink:href="#linearGradient8383"/>
+  <linearGradient y2="10.02837" x2="179.82935" y1="-7.809919" x1="164.00101" gradientTransform="matrix(2.26152,1.549976,-0.715005,1.04324,289.7366,-150.8217)" gradientUnits="userSpaceOnUse" id="linearGradient14264" xlink:href="#linearGradient8383"/>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <path fill="white" fill-rule="evenodd" stroke="black" stroke-width="4.279" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" id="path6885" d="m48.470951,60.018414l0,497.968525c1.564335,173.993286 93.12611,195.321899 178.320309,250.296692c42.769043,27.598267 103.56073,38.279114 154.871185,118.745728c51.310425,-80.466614 112.102081,-91.147461 154.871124,-118.745728c85.194153,-54.974792 176.75592,-76.303406 178.320374,-250.296692l0,-497.968525c-38.169922,41.707821 -110.114563,56.867489 -165.207764,56.867489c-67.238403,0 -111.980255,-13.895805 -167.983734,-56.867489c-56.00354,42.971684 -100.745422,56.867489 -167.983826,56.867489c-55.093216,0 -127.037704,-15.159668 -165.207668,-56.867489z"/>
+ </g>
+</svg>
