@@ -54,7 +54,7 @@
 					<h4 id="aboutId" class="navbar-brand">
 						<!-- data-toggle="collapse" data-target="#info" -->
 						<!-- data-bind="click: showAbout" -->
-						<b data-bind="click: showAbout">About</b>
+						<b>About</b>
 					</h4>
 				</div>
 			</div>
@@ -62,7 +62,7 @@
 			<div id="feedback">
 				<div class="navbar-header">
 					<h4 id="feedbackId" class="navbar-brand">
-						<b data-bind="click: bugReport">Feedback</b>
+						<b>Feedback</b>
 					</h4>
 				</div>
 			</div>
@@ -98,13 +98,85 @@
 			</div>
 
 			<div id="startBarID" class="alert mainMenuItem startBar">
-			  <i class="fa fa-clock-o"></i> &nbsp; Start Task / Stop Task
+			  <div data-bind="click: toggleStartDock">
+			  	<i class="fa fa-clock-o"></i> &nbsp; <span data-bind="text:taskButtonText"></span> <span id="taskTimer" class="collapse customBadge">21 Min</span>
+			  </div>
+			  <div id="startDock" class="collapse openDrawContainer">
+				  	<div style="margin-top:10px;">
+						<strong>Prepare</strong> - <i style="font-size:12px;"> Setup for Success. </i>
+						<div class="distractionRegion">
+							<span class="distractionButton" style="width:35px;">
+								<span class="badge" style="background-color:#eee; width:35px;">
+									<img src="images/distractions/toliet.png" style="height:25px; width:25px;" />
+								</span>
+								<span class="distractionText" style="margin-left:5px;">
+									Body
+								</span>
+							</span>
 
+							<span class="distractionButton">
+								<span class="badge unactiveBadge">
+									<img src="images/distractions/food_and_drink.png" style="height:25px; width:25px;" />
+								</span>
+								<span class="distractionText" style="margin-left:4px;">
+									Hunger
+								</span>
+							</span>
+
+							<span class="distractionButton">
+								<span class="badge unactiveBadge">
+									<img src="images/distractions/noise.png" style="height:25px; width:25px;" />
+								</span>
+								<span class="distractionText">
+									Monolog
+								</span>
+							</span>
+
+							<span class="distractionButton">
+								<span class="badge unactiveBadge">
+									<img src="images/distractions/materials.png" style="height:25px; width:25px;" />
+								</span>
+								<span class="distractionText">
+									Materials
+								</span>
+							</span>
+
+							<span class="distractionButton">
+								<span class="badge unactiveBadge" style="margin-left:7px;">
+									<img src="images/distractions/music.png" style="height:25px; width:25px;" />
+								</span>
+								<span class="distractionText">
+									Enviroment
+								</span>
+							</span>
+						</div>
+					</div>
+					<div>
+						<strong>To Do</strong>
+						<br/>
+						<textarea style="width:98%; height:50px; color:#000;" placeholder="The goal you going to achieve."></textarea>
+					</div>
+					<div style="height:50px;">
+						<strong>In</strong>
+						<br/>
+						<select class="form-control" style="width:70%;">
+							<option value="40">40 Minutes</option>
+							<option value="50" selected>50 Minutes</option>
+							<option value="60">60 Minutes</option>
+							<option value="70">70 Minutes</option>
+							<option value="80">80 Minutes</option>
+							<option value="90">90 Minutes</option>
+						</select>
+						<input type="button" value="Start" class="btn btn-primary btn-sm startButton"  data-bind="click: startTask"/>
+					</div>
+			  </div>
 			</div>
 
 			<div id="achievedBarID" class="alert mainMenuItem achievedBar" style="margin-top:-10px;">
-			  <i class="fa fa-check-square-o"></i> &nbsp; <strong>Achieved Today</strong> 
-			  <span class="customBadge">02</span>
+				<div>
+				  <i class="fa fa-check-square-o"></i> &nbsp; <strong>Achieved Today</strong>
+				  <span class="customBadge">02</span>
+				</div>
 			</div>
 
 			<div id="statsBarID" class="alert mainMenuItem statsBar" style="margin-top:-10px;">
@@ -181,7 +253,7 @@
 
 
 			<div class="alert mainMenuItem historyPanel historyBar">
-			  <i class="fa fa-external-link"></i> &nbsp; <strong>History</strong> <span class="customBadge">21</span>
+			  <i class="fa fa-external-link"></i> &nbsp; <strong>History</strong> <span class="customBadge">211</span>
 			</div>
 
 		</main>
@@ -209,6 +281,7 @@
 	<script src="libs/jquery.js"></script>
 	<script src="libs/knockout.js"></script>
 	<script src="libs/bootstrap.min.js"></script>
+	<script src="libs/placeholders.min.js"></script>
 
 	<!-- Service Import -->
 	<script src="scripts/viewService.js"></script>
