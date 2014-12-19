@@ -271,4 +271,10 @@
 			}
 		};
 
+		self.openFeedback = function(){
+			closeMenu();
+			var link = "http://goo.gl/forms/xYZSnachXN";
+			webHelper.openUrl(link);
+		};
+
 	}
