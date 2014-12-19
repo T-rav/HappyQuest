@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="An application to monitor the Eskom loadsheding status">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>FoobaR</title>
+    <title>Happy Quest</title>
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
@@ -58,26 +58,51 @@
 					</h4>
 				</div>
 			</div>
+
+			<div id="feedback">
+				<div class="navbar-header">
+					<h4 id="feedbackId" class="navbar-brand">
+						<b>Feedback</b>
+					</h4>
+				</div>
+			</div>
+
 		</div>
 		
 		<main class="main-container">
-		
+			
+
 			<div class="alert" style="margin-top:-30px;">
 				<!-- <span style="position:fixed;top:60%;left:15%;"> -->
-			  <img src="images/penguin5.svg" style="margin-left:5%; height:100px; width:100px;" />
+			  <img src="images/green-bird.svg" style="margin-left:5%; height:100px; width:100px;" />
 			  <span class="left20">
-					<h2 class="logo">Foo<strong>Bar</strong></h2>
+					<h2 class="logo">Happy<strong>Quest</strong></h2>
 			  </span>
 			  <br/>
-			  <div class="quote"> DB Write Experiement </div>
+			  <div class="quote"> Small achievements yield large results </div>
+			  <!--
+
+				Nothing is impossible, the word itself says 'I'm possible'!
+				The measure of who we are is what we do with what we have.
+				Your big opportunity may be right where you are now.
+				Try to be a rainbow in someone's cloud.
+				We know what we are, but know not what we may be.
+				Change your thoughts and you change your world.
+				Whoever is happy will make others happy too.
+				I dwell in possibility.
+				If opportunity doesn't knock, build a door.
+				It is always the simple that produces the marvelous.
+
+
+			   -->
 			</div>
 
 			<div id="startBarID" class="alert mainMenuItem startBar">
 			  <div data-bind="click: toggleStartDock">
-			  	<i class="fa fa-clock-o"></i> &nbsp; <span data-bind="text:taskButtonText"></span> <span id="taskTimer" class="collapse customBadge">21 Min</span>
+			  	<i class="fa fa-clock-o"></i> &nbsp; <span data-bind="text:taskButtonText"></span> <span id="taskTimer" class="collapse customBadge" data-bind="text: taskTimerValue"></span>
 			  </div>
-			  <div id="startDock" class="collapse openDrawContainer">
-				  	<div style="margin-top:10px; margin-bottom:2px;">
+			   <div id="startDock" class="collapse openDrawContainer">
+				  	<div id="distractionList" style="margin-top:10px; margin-bottom:2px;">
 						<strong>Prepare</strong> <br/>
 						<i id="prepMessage" style="font-size:12px; width:90%; overflow:hidden;"> <span data-bind="text: prepMessage"></span> </i>
 						<div class="distractionRegion">
@@ -127,7 +152,7 @@
 							</span>
 						</div>
 					</div>
-					<div>
+					<div id="taskDescription" >
 						<strong>To Do</strong>
 						<br/>
 						<textarea style="width:98%; height:50px; color:#000;" placeholder="The goal you are going to achieve." data-bind="value: taskDescription"></textarea>
@@ -141,7 +166,89 @@
 					<br/>
 			  </div>
 			</div>
-			
+
+			<div id="achievedBarID" class="alert mainMenuItem achievedBar" style="margin-top:-10px;">
+				<div>
+				  <i class="fa fa-check-square-o"></i> &nbsp; <strong>Achieved Today</strong>
+				  <span class="customBadge" data-bind="text : dailyAchieved"></span>
+				</div>
+			</div>
+
+			<div id="statsBarID" class="alert mainMenuItem statsBar" style="margin-top:-10px;">
+			  <i class="fa fa-line-chart"></i> &nbsp; <strong>Stats</strong>
+			</div>
+
+			<div id="statsRegoinID" class="alert " style="margin-top:-20px;">
+				<div class="statsRegion">
+					<i class="fa fa-star-o"></i> <span>Task Attempted</span>  <span class="customBadgeStats" data-bind="text: globalAttempts"></span>
+				</div>
+				<div class="statsRegion statsBuffer" style="width:100%;">
+					<i class="fa fa-star" style="color:#f39c12;"></i> <span>Task Achieved</span> <span class="customBadgeStats" data-bind="text: globalAchieved"></span>
+				</div>
+				<div class="statsBuffer">
+					<div>
+						<i class="fa fa-trophy" style="color:#95a5a6;"></i> <span>Achievements</span> 
+					</div>
+					<!-- 1 -->
+					<span style="margin-top:10px; float:left; width:45px;">
+						<!-- stickers go here -->
+						<img src="images/rewards/start.png" style="height:40px; width:40px; margin-left:-10px;" />
+						<br/>
+						<div class="rewardBar">
+							Start
+						</div>
+					</span>
+					<!-- 10 -->
+					<span style="margin-top:10px; float:left; width:45px;">
+						<!-- stickers go here -->
+						<img src="images/rewards/locked.png" style="height:40x; width:40px; margin-left:-10px;" />
+						<br/>
+						<div class="rewardBar">
+							? 
+						</div>
+					</span>
+					<!-- 25 -->
+					<span style="margin-top:10px; float:left; width:45px;">
+						<!-- stickers go here -->
+						<img src="images/rewards/locked.png" style="height:40x; width:40px; margin-left:-10px;" />
+						<br/>
+						<div class="rewardBar">
+							?? 
+						</div>
+					</span>
+					<!-- 50 -->
+					<span style="margin-top:10px; float:left; width:45px;">
+						<!-- stickers go here -->
+						<img src="images/rewards/locked.png" style="height:40x; width:40px; margin-left:-10px;" />
+						<br/>
+						<div class="rewardBar">
+							?? 
+						</div>
+					</span>
+					<!-- 100 -->
+					<span style="margin-top:10px; float:left; width:45px;">
+						<!-- stickers go here -->
+						<img src="images/rewards/locked.png" style="height:40x; width:40px; margin-left:-10px;" />
+						<br/>
+						<div class="rewardBar">
+							??? 
+						</div>
+					</span>
+					<!-- 250 -->
+					<span style="margin-top:10px; float:left; width:45px;">
+						<!-- stickers go here -->
+						<img src="images/rewards/locked.png" style="height:40x; width:40px; margin-left:-10px;" />
+						<br/>
+						<div class="rewardBar">
+							??? 
+						</div>
+					</span>
+				</div>
+			</div>
+			<div class="alert mainMenuItem historyPanel historyBar">
+			  <i class="fa fa-external-link"></i> &nbsp; <strong>History</strong> <span class="customBadge" data-bind="text: globalAttempts"></span>
+			</div>
+
 		</main>
 	</div>
 
@@ -167,11 +274,10 @@
 	<script src="libs/knockout.js"></script>
 	<script src="libs/bootstrap.min.js"></script>
 	<script src="libs/placeholders.min.js"></script>
-	<!-- here for tresting -->
-    <script src="libs/SQLitePlugin.js"></script>
 
 	<!-- Service Import -->
 	<script src="scripts/viewService.js"></script>
+	<script src="scripts/dataService.js"></script>
 
 	<!-- View Model Imports -->
 	<script src="scripts/viewModel.js"></script>

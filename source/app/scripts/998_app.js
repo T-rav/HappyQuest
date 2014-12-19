@@ -13,8 +13,9 @@
             //var waitTime = 10000;
 		
             this.fixBottomMenuItemsForSmallerScreens();
+            var dataService = new DataService();
             var viewService = new ViewService();
-            var viewModel = new ViewModel(viewService);
+            var viewModel = new ViewModel(viewService, dataService);
 
             this.bindApp(viewModel);
 			
@@ -29,6 +30,8 @@
         },
         bindApp:function(viewModel){
             
+            viewModel.init();
+
             // -- main
             ko.applyBindings(viewModel, document.getElementById("main"));
 

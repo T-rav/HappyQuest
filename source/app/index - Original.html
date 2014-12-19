@@ -101,10 +101,9 @@
 			  <div data-bind="click: toggleStartDock">
 			  	<i class="fa fa-clock-o"></i> &nbsp; <span data-bind="text:taskButtonText"></span> <span id="taskTimer" class="collapse customBadge">21 Min</span>
 			  </div>
-			  <div id="startDock" class="collapse openDrawContainer">
-				  	<div style="margin-top:10px;">
-						<strong>Prepare</strong>
-						<br/>
+			   <div id="startDock" class="collapse openDrawContainer">
+				  	<div id="distractionList" style="margin-top:10px; margin-bottom:2px;">
+						<strong>Prepare</strong> <br/>
 						<i id="prepMessage" style="font-size:12px; width:90%; overflow:hidden;"> <span data-bind="text: prepMessage"></span> </i>
 						<div class="distractionRegion">
 							<span class="distractionButton">
@@ -153,7 +152,7 @@
 							</span>
 						</div>
 					</div>
-					<div>
+					<div id="taskDescription" >
 						<strong>To Do</strong>
 						<br/>
 						<textarea style="width:98%; height:50px; color:#000;" placeholder="The goal you are going to achieve." data-bind="value: taskDescription"></textarea>
@@ -246,14 +245,11 @@
 					</span>
 				</div>
 			</div>
-
-
 			<div class="alert mainMenuItem historyPanel historyBar">
 			  <i class="fa fa-external-link"></i> &nbsp; <strong>History</strong> <span class="customBadge">211</span>
 			</div>
 
 		</main>
-
 	</div>
 
 	<!-- Default View -->

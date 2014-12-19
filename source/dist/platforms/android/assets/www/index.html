@@ -1,41 +1,142 @@
-<!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="An application to monitor the Eskom loadsheding status">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Eskom Loadshed</title>
 
-    http://www.apache.org/licenses/LICENSE-2.0
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/touch/192x192.png">
 
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-    </body>
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Crypto Stats">
+    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <!-- Page styles -->
+	<link href="styles/bootstrap.min.css" rel="stylesheet">
+	<link href="styles/font-awesome.min.css" rel="stylesheet">
+	<link href="styles/custom.css" rel="stylesheet">
+	
+	</head>
+	<body class="backgroundAdjust">
+  
+	<div id="main" >
+		<header class="app-bar promote-layer">
+		  <div class="app-bar-container">
+			<span style="float:right;">
+				<button style="width:25px;" data-bind="click: refresh"><img src="images/refresh.png"></button>
+				<button style="width:35px; margin-right:10px;" class="menu"><img src="images/hamburger.svg" alt="Menu"></button>
+			</span>
+		  </div>
+		</header> 
+
+		<!-- MENU -->
+		<div class="navdrawer-container promote-layer navbar navbar-default">
+
+			 <div id="about">
+				<div class="navbar-header">
+					<h4 id="aboutId" class="navbar-brand">
+						<!-- data-toggle="collapse" data-target="#info" -->
+						<!-- data-bind="click: showAbout" -->
+						<b data-bind="click: showAbout">About</b>
+					</h4>
+				</div>
+			</div>
+
+			<div id="feedback">
+				<div class="navbar-header">
+					<h4 id="feedbackId" class="navbar-brand">
+						<b data-bind="click: bugReport">Feedback</b>
+					</h4>
+				</div>
+			</div>
+
+			<!--
+			<div id="schedule">
+				<div class="navbar-header">
+					<h4 id="schedulesId" class="navbar-brand">
+						<b>Schedule</b>
+					</h4>
+				</div>
+			</div>
+			-->
+
+		</div>
+		
+		<main class="main-container">
+			<span style="position:fixed;top:20%;left:15%;">
+				<h2><strong>Loadshed</strong> Status </h2>
+				<div data-bind="css: color">
+				  <h5 style="margin-left:3px; margin-top:10px; text-align:center;" data-bind="text:message"></h5>
+				</div>
+			</span>
+			<span style="position:fixed;top:60%;left:15%;">
+				<img src="images/house-with-power-lines.svg" height="20%" width="90%"/>
+			</span>
+		</main>
+
+	</div>
+
+	<!-- Default View -->
+	<!-- TODO : Build defaults model, use knockout to bind options in drop down -->
+	<div id="aboutApp" class="settings-container collapse">
+		<header class="app-bar promote-layer marketHeadline">
+			<br/>
+			<h4 data-bind="click: closeAbout">
+				<span><img src="images/chevron.svg" height="25" width="20" /></span> 
+				About <strong>Loadshed</strong>
+			</h4>
+			<hr/>
+		</header>
+		<div style="margin-left:5%; width:90%;">
+			<strong>Monitors</strong> Eskom's load shedding <strong>status</strong> and <strong>notifies</strong> you when it changes.
+			<br/><br/>
+			Given that <strong>good information is scarce</strong>, anything else is futile.
+			<br/><br/><br/>
+			<img src="images/power_tower.svg" height="100" width="90%"/>
+			<br/><br/><br/>
+			Developed by <strong>StoneAge</strong> technologies.
+		</div>
+    </div>
+		
+	<!-- Deps Imports -->
+	<script src="cordova.js"></script>
+	<script src="libs/jquery.js"></script>
+	<script src="libs/knockout.js"></script>
+	<script src="libs/bootstrap.min.js"></script>
+
+	<!-- Service Import -->
+	<script src="scripts/viewService.js"></script>
+
+	<!-- View Model Imports -->
+	<script src="scripts/viewModel.js"></script>
+	<!-- Seed Import -->
+	<!--<script src="scripts/socialSharing.js"></script>-->
+	<script src="scripts/001_WebHelper.js"></script>
+	<script src="scripts/002_PrefsHelper.js"></script>
+	<script src="scripts/998_app.js"></script>
+	<script src="scripts/999_main.js"></script>
+
+	<script type="text/javascript">
+	
+		var prefs = window.PrefsHelper;
+		var noop = function() {};
+		var webHelper = window.WebHelper;
+	</script>
+    <!-- endbuild -->
+  </body>
 </html>
