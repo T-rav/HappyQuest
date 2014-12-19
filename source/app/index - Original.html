@@ -154,21 +154,15 @@
 					<div>
 						<strong>To Do</strong>
 						<br/>
-						<textarea style="width:98%; height:50px; color:#000;" placeholder="The goal you are going to achieve."></textarea>
+						<textarea style="width:98%; height:50px; color:#000;" placeholder="The goal you are going to achieve." data-bind="value: taskDescription"></textarea>
 					</div>
-					<div style="height:50px;">
+					<div style="height:40px;">
 						<strong>In</strong>
 						<br/>
-						<select class="form-control" style="width:70%;">
-							<option value="40">40 Minutes</option>
-							<option value="50" selected>50 Minutes</option>
-							<option value="60">60 Minutes</option>
-							<option value="70">70 Minutes</option>
-							<option value="80">80 Minutes</option>
-							<option value="90">90 Minutes</option>
-						</select>
+						<select class="form-control" style="width:70%;" data-bind="options: taskLength, value: selectedLength,valueAllowUnset: true"></select>
 						<input type="button" value="Start" class="btn btn-primary btn-sm startButton"  data-bind="click: startTask"/>
 					</div>
+					<br/>
 			  </div>
 			</div>
 

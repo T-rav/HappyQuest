@@ -6,6 +6,7 @@
 		self.taskDescription = ko.observable("");
 		self.taskLength = [ '40 Minutes', '50 Minutes', '60 Minutes', '70 Minutes','80 Minutes','90 Minutes'];
 		self.selectedLength = ko.observable('50 Minutes');
+		self.distractionList = [];
 		
 		self.taskMode = ko.observable(1); // 1 -- Start, 2 - Stop
 
@@ -41,6 +42,28 @@
 			console.log("Task Period : " + ms);
 			return ms;
 		};
+		
+		self.toggleDistractions = function(item){
+			var index = self.findDistractionIndex(item);
+			if(index == -1){
+				$("#"+item).removeClass("unactiveBadge");
+				$("#"+item).addClass("activeBadge");
+				self.distractionList.push(item);
+			}else{
+				$("#"+item).removeClass("activeBadge");
+				$("#"+item).addClass("unactiveBadge");
+				self.distractionList.splice(index, 1);
+			}
+		};
+		
+		self.findDistractionIndex = function(item){
+			for(var i=0; i < self.distractionList.length; i++){
+				if(self.distractionList[i] == item){
+					return i;
+				}
+			}
+			return -1;
+		};
 
 		self.toggleStartDock = function(){
 			if(self.taskMode() == 1){
@@ -62,13 +85,5 @@
 			}
 		};
 
-		self.toggleAchievedDock = function(){
-			$("#achievedDock").toggleClass("collapse");
-			$("#achievedDockArrow").toggleClass("collapse");
-		};
-
-		self.closeAbout = function(){
-			$("#aboutApp").toggleClass("collapse");
-		};
 	}
 		
