@@ -277,4 +277,13 @@
 			webHelper.openUrl(link);
 		};
 
+		self.showAbout = function(){
+			closeMenu();
+			$("#aboutApp").toggleClass("collapse");
+		};
+
+		self.closeAbout = function(){
+			$("#aboutApp").toggleClass("collapse");
+		};
+
 	}

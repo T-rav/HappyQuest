@@ -51,7 +51,7 @@
 
 			 <div id="about">
 				<div class="navbar-header">
-					<h4 id="aboutId" class="navbar-brand">
+					<h4 id="aboutId" class="navbar-brand" data-bind="click: showAbout">
 						<!-- data-toggle="collapse" data-target="#info" -->
 						<!-- data-bind="click: showAbout" -->
 						<b>About</b>
@@ -263,20 +263,28 @@
 		</main>
 	</div>
 
-	<!-- Default View -->
-	<!-- TODO : Build defaults model, use knockout to bind options in drop down -->
 	<div id="aboutApp" class="settings-container collapse">
 		<header class="app-bar promote-layer marketHeadline">
 			<br/>
 			<h4 data-bind="click: closeAbout">
 				<span><img src="images/chevron.svg" height="25" width="20" /></span> 
-				About <strong>Happy</strong>Task
+				About <strong>Happy</strong>Quest
 			</h4>
 			<hr/>
 		</header>
-		<span>
-			Happy Task is an application.
-		</span>
+		<div style="margin-left:5%; width:90%;">
+			<strong>HappyQuest</strong> is built on the blief that getting into <strong>flow is first and formost for happiness and success.</strong>
+			<br/><br/>
+			A simple three step process is used to setup for success. First, clear your heart, body and enviroment of distractions.
+			Next, identify the goal you want to achieve.
+			Finally, specify how long it will take, 40 - 90 minutes, and go.
+			<br/><br/>
+			After a few weeks you will <strong>feel happier and more engaged with life</strong> as you build upon each small success achieving big results. 
+			<br/><br/>
+			<strong>Achieving small goals is practice for the big things in life.</strong>
+			<br/><br/>
+			Developed by <strong>StoneAge</strong> technologies. 
+		</div>
     </div>
 		
 	<!-- Deps Imports -->

@@ -34,6 +34,7 @@
 
             // -- main
             ko.applyBindings(viewModel, document.getElementById("main"));
+            ko.applyBindings(viewModel, document.getElementById("aboutApp"));
 
         },
         fixBottomMenuItemsForSmallerScreens: function() {
