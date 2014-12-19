@@ -11,8 +11,11 @@
    height="100"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.5 r10040"
-   sodipodi:docname="icon.svg">
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="icon.svg"
+   inkscape:export-filename="C:\Projects\Happy, Happy\source\dist\platforms\android\res\drawable\icon.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <metadata
      id="metadata17">
     <rdf:RDF>
@@ -43,8 +46,8 @@
      inkscape:zoom="1"
      inkscape:cx="240.32353"
      inkscape:cy="200"
-     inkscape:window-x="2322"
-     inkscape:window-y="115"
+     inkscape:window-x="812"
+     inkscape:window-y="89"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg2" />
   <path

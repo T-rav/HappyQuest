@@ -2,9 +2,9 @@
 <widget id="com.stoneagetechnologies.happytask" version="0.9.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>HappyTask</name>
     <description>
-        A micro task framework maxumizing flow time.
+        A micro task framework maximizing flow time.
     </description>
-    <author email="dev@cordova.apache.org" href="http://stoneagetechnologies.com/happyquest">
+    <author email="tmfrisinger@gmail.com" href="http://stoneagetechnologies.com/happyquest">
         StoneAge Technologies
     </author>
     <content src="index.html" />
