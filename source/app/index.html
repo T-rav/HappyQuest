@@ -76,10 +76,10 @@
 			  <div data-bind="click: toggleStartDock">
 			  	<i class="fa fa-clock-o"></i> &nbsp; <span data-bind="text:taskButtonText"></span> <span id="taskTimer" class="collapse customBadge">21 Min</span>
 			  </div>
-			  <!-- ata-bind="text: name, click: $parent.toggleDefault, css: { selectedBadge: selected, deselectedBadge: !selected }" -->
 			  <div id="startDock" class="collapse openDrawContainer">
-				  	<div style="margin-top:10px;">
-						<strong>Prepare</strong> - <i style="font-size:12px;"> Setup for Success. </i>
+				  	<div style="margin-top:10px; margin-bottom:2px;">
+						<strong>Prepare</strong> <br/>
+						<i id="prepMessage" style="font-size:12px; width:90%; overflow:hidden;"> <span data-bind="text: prepMessage"></span> </i>
 						<div class="distractionRegion">
 							<span class="distractionButton">
 								<span id="body" class="badge unactiveBadge">

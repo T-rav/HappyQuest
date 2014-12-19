@@ -6,6 +6,7 @@
 		self.taskDescription = ko.observable("");
 		self.taskLength = [ '40 Minutes', '50 Minutes', '60 Minutes', '70 Minutes','80 Minutes','90 Minutes'];
 		self.selectedLength = ko.observable('50 Minutes');
+		self.prepMessage = ko.observable("Setup for Success");
 		self.distractionList = [];
 		
 		self.taskMode = ko.observable(1); // 1 -- Start, 2 - Stop
@@ -19,8 +20,7 @@
 			self.taskMode(2);
 			self.setCallback();
 			
-			// TODO : Build distraction list ;)
-			viewService.writeTask(self.taskDescription(), self.getTaskMinutes());
+			viewService.writeTask(self.distractionList, self.taskDescription(), self.getTaskMinutes());
 		};
 		
 		self.setCallback = function(){
@@ -49,11 +49,31 @@
 				$("#"+item).removeClass("unactiveBadge");
 				$("#"+item).addClass("activeBadge");
 				self.distractionList.push(item);
+				self.setPrepMessage(item);
 			}else{
 				$("#"+item).removeClass("activeBadge");
 				$("#"+item).addClass("unactiveBadge");
 				self.distractionList.splice(index, 1);
+				self.setPrepMessage("foo"); // fake a reset
 			}
+		};
+		
+		self.setPrepMessage = function(item){
+			
+			var msg = "Setup for Success";
+			if(item == "body"){
+				msg = "Change clothes, use the toilet, get comfortable.";
+			}else if(item == "food"){
+				msg = "Have a snack, hot or cold drink, prepare your body.";
+			}else if(item == "monolog"){
+				msg = "Acknowledge, discard or defer other thoughts. Focus.";
+			}else if(item == "materials"){
+				msg = "Do you have everything to complete this task?";
+			}else if(item == "environment"){
+				msg = "Noisy, slient or with music, make it ideal for you.";
+			}
+			
+			self.prepMessage(msg);
 		};
 		
 		self.findDistractionIndex = function(item){
@@ -84,6 +104,4 @@
 				self.taskMode(1);
 			}
 		};
-
 	}
-		
