@@ -351,6 +351,64 @@
 	             this.didAchieve(newValue === "yes");
 	        },
        		owner: self        
-    	});          
+    	});      
+
+    	self.sourceIcon = function(link){
+
+			var value = link.toLowerCase();
+			// cryptocoinsnews
+			// CoinDesk
+			// BitcoinMagazine
+			// Generic
+
+			var img = "images/rewards/";
+
+			if(value === "1" && self.globalAchieved() >= 1){
+				return img+"star.png";
+			}else if(value === "10"  && self.globalAchieved() >= 10){
+				return img+"bolt.png";
+			}else if(value === "25" && self.globalAchieved() >= 25){
+				return img+"bullseye.png";
+			}else if(value === "50" && self.globalAchieved() >= 50){
+				return img+"silver_medal.png";
+			}else if(value === "100" && self.globalAchieved() >= 100){
+				return img+"gold_metal.png";
+			}else if(value === "500" && self.globalAchieved() >= 250){
+				return img+"up_arrow.png";
+			}else if(value === "500" && self.globalAchieved() >= 500){
+				return img+"trophy.png";
+			}else if(value === "1000" && self.globalAchieved() >= 1000){
+				return img+"crown.png";
+			}
+
+			return img+"locked.png";
+
+		};    
+
+		self.sourceMsg = function(link){
+
+			var value = link.toLowerCase();
+			// cryptocoinsnews
+			// CoinDesk
+			// BitcoinMagazine
+			// Generic
+
+			var img = "images/rewards/";
+
+			if(value === "1" && self.globalAchieved() >= 1){
+				return "Success";
+			}else if(value === "10"  && self.globalAchieved() >= 10){
+				return "Triumph";
+			}else if(value === "25" && self.globalAchieved() >= 25){
+				return "Victory";
+			}else if(value === "50" && self.globalAchieved() >= 50){
+				return "Fulfillment";
+			}else if(value === "100" && self.globalAchieved() >= 100){
+				return "Proficiency";
+			}
+
+			return "???";
+		};    
+
 
 	}
