@@ -13,10 +13,10 @@
             //var waitTime = 10000;
 		
             this.fixBottomMenuItemsForSmallerScreens();
+            var dataService = new DataService();
             var viewService = new ViewService();
-            var viewModel = new ViewModel(viewService);
+            var viewModel = new ViewModel(viewService, dataService);
 
-            this.fetchStatus(viewService, viewModel);
             this.bindApp(viewModel);
 			
 			this.activateMonitor(viewModel, waitTime);
@@ -30,9 +30,12 @@
         },
         bindApp:function(viewModel){
             
+            viewModel.init();
+
             // -- main
             ko.applyBindings(viewModel, document.getElementById("main"));
             ko.applyBindings(viewModel, document.getElementById("aboutApp"));
+
         },
         fixBottomMenuItemsForSmallerScreens: function() {
             // if you have a ul.bottom, this helps to place it on smaller screens
