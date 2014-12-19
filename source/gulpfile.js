@@ -82,10 +82,16 @@ gulp.task('fonts', function () {
 // Compile and Automatically Prefix Stylesheets
 gulp.task('styles', function () {
   // For best performance, don't add Sass partials to `gulp.src`
+  
+  // ORGININAL
+  //return gulp.src([
+  //  'app/styles/*.scss',
+  //  'app/styles/**/*.css',
+  //  'app/styles/components/components.scss'
+  //])
+  
   return gulp.src([
-    'app/styles/*.scss',
     'app/styles/**/*.css',
-    'app/styles/components/components.scss'
   ])
     .pipe($.changed('styles', {extension: '.scss'}))
     .pipe($.rubySass({
