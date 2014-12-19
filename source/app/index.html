@@ -180,10 +180,10 @@
 
 			<div id="statsRegoinID" class="alert " style="margin-top:-20px;">
 				<div class="statsRegion">
-					<i class="fa fa-star-o"></i> <span>Task Attempted</span>  <span class="customBadgeStats" data-bind="text: globalAttempts"></span>
+					<i class="fa fa-star" style="color:#f39c12;"></i> <span>Lifetime Achieved</span> <span class="customBadgeStats" data-bind="text: globalAchieved"></span>
 				</div>
 				<div class="statsRegion statsBuffer" style="width:100%;">
-					<i class="fa fa-star" style="color:#f39c12;"></i> <span>Task Achieved</span> <span class="customBadgeStats" data-bind="text: globalAchieved"></span>
+					<i class="fa fa-star-o"></i> <span>Lifetime Attempted</span>  <span class="customBadgeStats" data-bind="text: globalAttempts"></span>
 				</div>
 				<div class="statsBuffer">
 					<div>
@@ -246,9 +246,20 @@
 				</div>
 			</div>
 			<div class="alert mainMenuItem historyPanel historyBar">
-			  <i class="fa fa-external-link"></i> &nbsp; <strong>History</strong> <span class="customBadge" data-bind="text: globalAttempts"></span>
-			</div>
 
+		    	<div data-bind="click: toggleHistoryDock">
+			  		<i class="fa fa-external-link"></i> &nbsp; <strong>History</strong> <span class="customBadge" data-bind="text: historyList().length"></span>
+			  	</div>
+			    <div id="historyDock" class="collapse openDrawContainerWidth">
+			    	<div class="btn-group-vertical" style="width:100%;" data-bind="foreach: historyList">
+					    <span data-bind="text: dateOf" ></span>
+					    <span data-bind="text: achieved" style="float:right;"></span>
+					    <div data-bind="text: attempts" style="width:100%; text-align:right;"></div>
+					    <hr style="width:100%; margin-top:5px;"/>
+					</div>
+					
+			    </div>
+			</div>			 
 		</main>
 	</div>
 

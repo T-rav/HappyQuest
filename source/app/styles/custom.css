@@ -48,6 +48,7 @@
 .rewardBar{font-size:10px;  margin-left:-10px; width:40px; text-align:center;}
 .openDrawIcon{float:right; margin-right: 12px; width:7px;}
 .openDrawContainer{border-top: 1px solid #fff; width:92%;}
+.openDrawContainerWidth{width:92%; margin-top: 15px;}
 .startButton{float:right; margin-right:10px; margin-top:-40px;}
 .distractionButton{margin-top:5px; float:left; width:40px; margin-left: 10px;}
 .distractionText{color:#aaa; font-size:10px; width:40px; text-align: center;}

@@ -15,6 +15,8 @@
 		self.globalAchieved = ko.observable("00");
 		self.globalAttempts = ko.observable("00");
 
+		self.historyList = ko.observableArray();
+
 		self.distractionList = [];
 		self.naturalStop = false;
 		
@@ -31,6 +33,14 @@
 			var globalStatsObj = self.dataService.fetchGlobalStats();
 			self.globalAchieved(globalStatsObj.achieved);
 			self.globalAttempts(globalStatsObj.attempts);
+			
+			// pump history on start ;)
+			var history = globalStatsObj.historyList;
+			var keys = Object.keys(history);
+
+			for(var i = 0 ; i < keys.length; i++){
+				self.historyList().push({"dateOf":keys[i],"attempts" : history[keys[i]].attempts + " - Attempts ","achieved" : history[keys[i]].achieved + " - Achieved"});
+			}
 
 		};
 
@@ -66,6 +76,17 @@
 			// update global stats
 			var globalStatsObj = self.dataService.fetchGlobalStats();
 			globalStatsObj.attempts += 1;
+
+			// mark today off as sweet ass ;)
+			var obj = globalStatsObj.historyList[today];
+			if(obj !== undefined){
+				obj.attempts += 1;
+			}else{
+				obj = {};
+				obj.attempts = 1;
+				globalStatsObj.historyList[today] = obj;
+			}
+
 			self.dataService.persistGlobalStats(globalStatsObj);
 			console.log("Lifetime Attempts " + globalStatsObj.attempts);
 		};
@@ -73,7 +94,7 @@
 		self.validate = function(){
 			
 			if(self.distractionList.length < 5){
-				self.prepMessage("Touch every icon and action or defer each.");
+				self.prepMessage("Touch every icon and actioning or defer the item.");
 				$("#distractionList").addClass("redBoarder");
 				$("#taskDescription").removeClass("redBoarder");
 				return false;
@@ -181,6 +202,10 @@
 			}
 		};
 
+		self.toggleHistoryDock = function(){
+			$("#historyDock").toggleClass("collapse");
+		};
+
 		self.stopTask = function(){
 			$("#startBarID").removeClass("stopBar");
 			$("#startBarID").addClass("feedbackBar");
@@ -204,7 +229,6 @@
 
 			var today = self.viewService.getToday();
 
-
 			// update daily stats
 			var statsObj = self.dataService.fetchDailyMasterStats(today);
 			statsObj.achieved += 1;
@@ -214,11 +238,29 @@
 			// update global stats
 			var globalStatsObj = self.dataService.fetchGlobalStats();
 			globalStatsObj.achieved += 1;
+
+			// update the daily stats for history
+			if(globalStatsObj.historyList === undefined){
+				globalStatsObj.historyList = {};
+			}
+
+			// mark today off as sweet ass ;)
+			var obj = globalStatsObj.historyList[today];
+			if(obj !== undefined){
+				obj.achieved += 1;
+			}else{
+				obj = {};
+				obj.achieved = 1;
+				globalStatsObj.historyList[today] = obj;
+			}
+
 			self.dataService.persistGlobalStats(globalStatsObj);
 			console.log("Lifetime Achieved " + globalStatsObj.achieved);
 
 			// update view model property
 			self.dailyAchieved(statsObj.achieved);
+			self.globalAchieved(globalStatsObj.achieved);
+			self.globalAttempts(globalStatsObj.attempts);
 		};
 
 		self.setLocalNotifiation = function(msg){
