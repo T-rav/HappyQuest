@@ -7,12 +7,12 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="512"
-   height="512"
+   width="100"
+   height="100"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
-   sodipodi:docname="purple-bird.svg">
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="icon.svg">
   <metadata
      id="metadata17">
     <rdf:RDF>
@@ -43,19 +43,19 @@
      inkscape:zoom="1"
      inkscape:cx="240.32353"
      inkscape:cy="200"
-     inkscape:window-x="609"
-     inkscape:window-y="133"
+     inkscape:window-x="2322"
+     inkscape:window-y="115"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg2" />
   <path
      style="fill:#decd87"
      inkscape:connector-curvature="0"
      id="svg_100"
-     d="m 438.71915,179.3144 48.18793,-29.948 -68.72197,-18.32073 C 360.79069,39.204655 243.66326,87.099333 204.51431,174.44776 157.28473,279.73094 22.009714,318.13772 22.009714,318.13772 c 96.278216,104.2739 183.110946,123.1052 241.027006,118.94901 57.94641,-4.18186 214.338,-45.6642 181.78309,-230.79497 -1.69314,-9.62642 -3.74911,-18.58589 -6.10066,-26.97736 z" />
+     d="M 82.210885,35.036878 90.90709,29.636872 78.505224,26.333408 C 68.147581,9.773313 47.010262,18.409333 39.945276,34.159363 31.422023,53.143252 7.009714,60.068487 7.009714,60.068487 24.384494,78.870398 40.0547,82.265919 50.50648,81.516507 60.963737,80.762464 89.186836,73.282672 83.311836,39.90124 83.006285,38.165471 82.635255,36.549964 82.210885,35.036878 z" />
   <g
      id="svg_101"
      style="fill:#1c241f"
-     transform="matrix(0.32814082,0,0,0.29881202,13.508235,32.538172)">
+     transform="matrix(0.05921769,0,0,0.0538796,5.4755002,8.571258)">
     <path
        style="fill:#1c241f"
        inkscape:connector-curvature="0"

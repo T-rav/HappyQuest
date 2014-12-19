@@ -18,6 +18,8 @@
 				}
 			},1500);
 			// TODO : Adjust to proper time
+			
+			viewService.writeTask(formData);
 		};
 
 		self.toggleStartDock = function(){

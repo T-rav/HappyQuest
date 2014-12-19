@@ -24,4 +24,9 @@ function ViewService(){
             }
         }); 
     };
+	
+	self.writeTask = function(formData){
+	
+		var a = 1;
+	};
 }
