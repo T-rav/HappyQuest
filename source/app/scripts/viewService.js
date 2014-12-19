@@ -1,8 +1,6 @@
 function ViewService(){
     var self = this;
 
-	var db = window.sqlitePlugin.openDatabase({name: "happyQuest.db"});
-
 	self.getToday = function(){
 		var today = new Date();
 		var dd = today.getDate();
@@ -23,7 +21,9 @@ function ViewService(){
 	};
 	
 	self.writeTask = function(distractions, task, duration){
-	
+		
+		var db = window.sqlitePlugin.openDatabase({name: "happyQuest.db"});
+
 		var a = 1;
 		db.transaction(function(tx){
 			tx.executeSql('CREATE TABLE IF NOT EXISTS test_table (id integer primary key, data text, data_num integer)');
