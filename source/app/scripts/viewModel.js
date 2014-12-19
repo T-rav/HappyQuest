@@ -249,6 +249,14 @@
 			// update daily stats
 			var statsObj = self.dataService.fetchDailyMasterStats(today);
 			statsObj.achieved += 1;
+
+			// TODO : Update the current entry with reflect data ;)
+			var statys = "ATTEMPTED";
+			if(self.didAchieve()){
+				status = "COMPLETED";	
+			}
+
+			self.dataService.setLastTaskStatus(today, status);
 			self.dataService.persistDailyMasterStats(today, statsObj);
 			console.log("Daily Achieved " + statsObj.achieved);
 
@@ -301,12 +309,6 @@
 
 		self.closeAbout = function(){
 			$("#aboutApp").toggleClass("collapse");
-		};
-
-		self.setAchievedStatus = function(status){
-			self.didAchieve(status);
-	
-			// TODO : Look up task and amend achieved flag ;)
 		};
 
 		self.closeReflect = function(){

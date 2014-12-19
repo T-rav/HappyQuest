@@ -18,6 +18,23 @@ function DataService(){
 
 	};
 
+	self.setLastTaskStatus = function(today, status){
+		var key = today+"_taskList";
+		var entry = self.fetchJson(key);
+		if(entry === ""){
+			return;
+		}
+
+		var len = entry.length-1;
+		
+		if(len >= 0){
+			entry[len].taskStatus = status;
+		}
+
+		self.persistJson(key, entry);
+
+	};
+
 	self.persistMasterDate = function(today){
 
 		var masterDate = self.fetch("masterDate");
