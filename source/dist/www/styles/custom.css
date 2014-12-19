@@ -1,0 +1,31 @@
+.logo{-webkit-flex:1;-ms-flex:1;flex:1;font-size:2em;line-height:60px;margin:0 10px;padding:0;color:#2c3e50;float:none;max-width:none;font-weight:300;display:initial}.app-bar .logo a{text-decoration:none;color:inherit;font-weight:400}.app-bar-actions{display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;z-index:2}.app-bar button{width:60px;height:60px;background-image:none;background-color:transparent;border:none;padding:0;display:inline-block;-webkit-transition:background-color .2s ease-out;transition:background-color .2s ease-out;-webkit-tap-highlight-color:transparent}.app-bar button img{height:24px;width:24px}.app-bar button:hover{background-color:rgba(255,255,255,.1)}.app-bar button:focus{background-color:rgba(255,255,255,.2);outline:0}.app-bar button:active{background-color:rgba(255,255,255,.4)}.promote-layer{-webkit-backface-visibility:hidden;backface-visibility:hidden}.base,p,ul,ol{font-size:21px; margin-left:10px;}.navdrawer-container{z-index:1;position:fixed;top:0;bottom:0;width:175px;height:100%;-webkit-transform:translate(-175px,0);transform:translate(-175px,0);overflow-y:auto;overflow-x:hidden;}.navdrawer-container.open{-webkit-transform:translate(0,0);transform:translate(0,0)}.app-bar,.navdrawer-container.opened,main{-webkit-transition:-webkit-transform .3s ease-out;transition:transform .3s ease-out}
+.main-container{box-sizing:content-box;position:relative;padding-left:5px;padding-right:5px;margin-left:auto;margin-right:auto;margin-bottom:10px; overflow-x:hidden; background-color: red;}
+.settings-container{box-sizing:content-box;position:fixed; top:0; height:100%; width:100%; background-color:#ecf0f1; }
+.news-container{box-sizing:content-box;position:fixed; top:0; height:100%; width:100%; background-color:#111; } 
+.tableHeader{display: table-cell;font-weight:bold;text-align:left;}.tableCell{text-align:left;display:table-cell;}.tableRow{display:table-row;}
+.listMenuItem { margin-left:10px; font-size:18px;}
+.smallListMenuItem { margin-left:10px; font-size:16px;}
+.footer {position: fixed;width:95%; bottom:0; margin-left: 5px; font-size:12px; margin-left:10px;}
+.middle {position: fixed;width:97%; bottom:0px;}
+.top{position:fixed;width:97%; bottom:40px;}
+.lastSync{font-size:10px;margin-left:5px;position:fixed;bottom:5px;}
+.selectedBadge{background-color:#df691a;color:#ffffff;}
+.deselectedBadge{background-color:#4E5D6C; color:#ffffff;}
+/* background-color:#52ADC8; */
+.oddHeadline{color:#ffffff; border-left: 2px solid #AAA; border-bottom: 2px solid #999;}
+/* background-color:#406082; */
+.evenHeadline{color:#ffffff; border-left: 2px solid #DF691A; border-bottom: 2px solid #999;}
+.tableWrapper{position:fixed;top:120px;bottom:30px;left:5px;font-size:13px;width:98%;overflow-y:scroll;overflow-x:hidden;}
+.newsWrapper{position:fixed;top:68px;bottom:-20px;font-size:13px;width:101%;overflow-y:scroll;overflow-x:hidden;}
+.headerWrapper{position:fixed;top:70px;height:50px;width:98%;}
+.tableContainer{width:98%;}
+.marketLeft{float:left;width:48%;}
+.marketRight{float:left;width:48%;}
+.socialRight {float: right; margin-right:3px;}
+.marketUp{color: #62c462; margin-left:-4px;}
+.marketFlat{color:#74cae3; margin-left:-4px;}
+.marketDown{color:#ec4d49; margin-left:-4px;}
+.marketSymbolContainer{width:100%;}
+.newsHeadline{margin-left:0px; margin-top:-10px; background-color:#52ADC8;}
+.marketHeadline{margin-left:0px; margin-top:-10px; background-color:#3498db; color:#fff;}
+.backgroundAdjust{background-color:#ecf0f1;}

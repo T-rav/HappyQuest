@@ -14,8 +14,7 @@
                     addCordovaJs();
                 } else {
                     if (window.cordova === undefined) {
-                        window.cordova = {
-                        };
+                        window.cordova = buildCordovaShim();
                         window.setTimeout(function checkDocumentReady() {
                             if (document.readyState === "complete") {
                                 document.dispatchEvent(new CustomEvent("deviceready", {
@@ -43,3 +42,13 @@
 		} catch (e) { 
 		}
 })();
+
+// The subbing of exec is critical as this allows the browser to continue doing its thing ;)
+function buildCordovaShim(){
+	return {
+		exec: function(onSuccess, onError, service, action, args){
+			//alert("Service " + service);
+			//setTimeout(function(){ }, 100);
+		}
+	};
+}

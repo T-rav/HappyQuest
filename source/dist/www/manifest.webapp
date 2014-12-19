@@ -1,0 +1,25 @@
+{
+  "version": "1.0.3",
+  "name": "Bitcoin Markets",
+  "launch_path": "/index.html",
+  "description": "An application to monitor BTC prices around the world.",
+  "icons": {
+    "128": "/images/touch/icon-128x128.png"
+  },
+  "developer": {
+    "name": "",
+    "url": ""
+  },
+  "installs_allowed_from": [
+    "*"
+  ],
+  "default_locale": "en",
+  "permissions": {
+  },
+  "locales": {
+    "en": {
+      "name": "Bitcoin Markets",
+      "description": "An application to monitor BTC prices around the world."
+    }
+  }
+}
