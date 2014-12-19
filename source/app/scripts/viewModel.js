@@ -10,10 +10,11 @@
 		self.selectedLength = ko.observable("50 Minutes");
 		self.prepMessage = ko.observable("Setup for Success");
 		self.taskTimerValue = ko.observable("??:??");
-
+		self.didAchieve = ko.observable(false);
 		self.dailyAchieved = ko.observable("00");
 		self.globalAchieved = ko.observable("00");
 		self.globalAttempts = ko.observable("00");
+		self.nextMsg = ko.observable("");
 
 		self.historyList = ko.observableArray();
 
@@ -50,6 +51,7 @@
 				return;
 			}
 
+			self.didAchieve(false);
 			self.toggleStartDock();
 			$("#taskTimer").toggleClass("collapse");
 			$("#startBarID").removeClass("startBar");
@@ -89,6 +91,16 @@
 
 			self.dataService.persistGlobalStats(globalStatsObj);
 			console.log("Lifetime Attempts " + globalStatsObj.attempts);
+
+			// we need to clear the form data
+			self.selectedLength("50 Minutes");
+			// reset the distraction icons ;(
+
+			var total = self.distractionList.length;
+			for(var i = 0; i < total; i++){
+				self.toggleDistractions(self.distractionList[0]);	
+			}
+			
 		};
 
 		self.validate = function(){
@@ -191,11 +203,18 @@
 		self.toggleStartDock = function(){
 			if(self.taskMode() == 1){
 				$("#startDock").toggleClass("collapse");
+				$("#reflectForm").addClass("collapse");
+				$("#startForm").removeClass("collapse");
+
 			}else if(self.taskMode() == 2){
 				self.stopTask();
 			}else if(self.taskMode() == 4){
 				$("#startBarID").removeClass("feedbackBar");
 				$("#startBarID").addClass("startBar");
+				$("#startDock").toggleClass("collapse");
+			
+				$("#startForm").removeClass("collapse");
+				$("#reflectForm").addClass("collapse");
 				
 				self.taskButtonText("Start Task");
 				self.taskMode(1);
@@ -212,17 +231,15 @@
 			$("#taskTimer").toggleClass("collapse");
 			$("#startDock").toggleClass("collapse");
 			
+			$("#startForm").addClass("collapse");
+			$("#reflectForm").removeClass("collapse");
+			
 			self.taskButtonText("Reflect");
 			self.taskMode(3);
 			
 			if(self.naturalStop){
 				self.setLocalNotifiation("Time is up. Please feedback on your task.");
 			}
-
-			// TODO : Display reflection screen
-			// Persist results to current entry if present ;)
-
-			self.updateAchievedStats();
 		};
 
 		self.updateAchievedStats = function(){
@@ -285,5 +302,30 @@
 		self.closeAbout = function(){
 			$("#aboutApp").toggleClass("collapse");
 		};
+
+		self.setAchievedStatus = function(status){
+			self.didAchieve(status);
+	
+			// TODO : Look up task and amend achieved flag ;)
+		};
+
+		self.closeReflect = function(){
+			self.updateAchievedStats();
+			self.taskMode(4);
+			self.toggleStartDock();
+			self.taskDescription("");
+		};
+
+		self.IsTrue = ko.computed({
+	        read: function() {
+	            if(self.didAchieve()){
+					return "yes";
+				}
+	        },
+	        write: function(newValue) {
+	             this.didAchieve(newValue === "yes");
+	        },
+       		owner: self        
+    	});          
 
 	}
