@@ -20,6 +20,7 @@
 
 		self.distractionList = [];
 		self.naturalStop = false;
+		self.radioInit = false;
 		
 		self.taskMode = ko.observable(1); // 1 -- Start, 2 - Stop
 
@@ -312,11 +313,32 @@
 		};
 
 		self.closeReflect = function(){
+
+			if(!self.validateReflection()){
+				return;
+			}
+
 			self.updateAchievedStats();
 			self.taskMode(4);
 			self.toggleStartDock();
 			self.taskDescription("");
+			self.radioInit = false;
 		};
+
+
+		self.validateReflection = function(){
+
+			if(!self.radioInit){
+				$("#achieveRegion").addClass("redBoarder");
+				return false;
+			}else  if(self.nextMsg().length < 2){
+				$("#rememberNextTime").addClass("redBoarder");
+				return false;
+			}
+
+			return true;
+		};
+
 
 		self.IsTrue = ko.computed({
 	        read: function() {
@@ -325,6 +347,7 @@
 				}
 	        },
 	        write: function(newValue) {
+	        	 self.radioInit = true;
 	             this.didAchieve(newValue === "yes");
 	        },
        		owner: self        
