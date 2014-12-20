@@ -10,7 +10,7 @@
     <feature name="LocalNotification">
         <param name="android-package" value="de.appplant.cordova.plugin.localnotification.LocalNotification" />
     </feature>
-    <name>HappyTask</name>
+    <name>HappyQuest</name>
     <description>
         A micro task framework maximizing flow time.
     </description>
