@@ -38,10 +38,13 @@
 			
 			// pump history on start ;)
 			var history = globalStatsObj.historyList;
-			var keys = Object.keys(history);
 
-			for(var i = 0 ; i < keys.length; i++){
-				self.historyList().push({"dateOf":keys[i],"attempts" : history[keys[i]].attempts + " - Attempts ","achieved" : history[keys[i]].achieved + " - Achieved"});
+			if(history !== undefined){
+				var keys = Object.keys(history);
+
+				for(var i = 0 ; i < keys.length; i++){
+					self.historyList().push({"dateOf":keys[i],"attempts" : history[keys[i]].attempts + " - Attempts ","achieved" : history[keys[i]].achieved + " - Achieved"});
+				}
 			}
 
 		};
