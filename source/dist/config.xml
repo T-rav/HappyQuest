@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.stoneagetechnologies.happytask" version="0.9.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>HappyTask</name>
+<widget id="cnom.stoneagetechnologies.happyquest" version="1.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>HappyQuest</name>
     <description>
-        A micro task framework maximizing flow time.
+        A sample Apache Cordova application that responds to the deviceready event.
     </description>
-    <author email="tmfrisinger@gmail.com" href="http://stoneagetechnologies.com/happyquest">
-        StoneAge Technologies
+    <author email="dev@cordova.apache.org" href="http://cordova.io">
+        Apache Cordova Team
     </author>
     <content src="index.html" />
     <access origin="*" />

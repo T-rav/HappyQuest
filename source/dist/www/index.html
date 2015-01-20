@@ -125,12 +125,12 @@
 									</span>
 								</span>
 
-								<span class="distractionButton">
-									<span id="monolog" class="badge unactiveBadge">
-										<img src="images/distractions/noise.png" style="height:25px; width:25px;"data-bind="click: function () { toggleDistractions('monolog'); }" />
+								<span class="distractionButtonWide">
+									<span id="monologue" class="badge unactiveBadge">
+										<img src="images/distractions/noise.png" style="height:25px; width:25px;"data-bind="click: function () { toggleDistractions('monologue'); }" />
 									</span>
 									<span class="distractionText">
-										Monolog
+										Monologue
 									</span>
 								</span>
 
@@ -169,23 +169,16 @@
 				<div id="reflectForm" class="collapse">
 					<strong>Your goal</strong>
 					<textarea style="width:98%; height:50px; color:#000;" data-bind="value: taskDescription"></textarea>
-					 <div id="achieveRegion" class="col-lg-10">
-					 	Did you achieve it?
-				        <div class="radio">
-				          <label>
-				            <input type="radio" name="achieved" id="achievedYes" value="yes" data-bind="checked: IsTrue">
-				            Yes
-				          </label>
-				        </div>
-				        <div class="radio">
-				          <label>
-				            <input type="radio" name="achieved" id="achievedNo" value="no" data-bind="checked: IsTrue">
-				            No
-				          </label>
-				        </div>
-      				</div>
+					Did you achieve your goal?
+				    <select id="achieveRegion" class="form-control" style="width:70%;" data-bind="options: taskStatus, value: selectedStatus,valueAllowUnset: true"></select>
       				Why?
-      				<input id="rememberNextTime" class="form-control" data-bind="value: nextMsg"/><br/><br/><br/>
+      				<input id="rememberNextTime" class="form-control" data-bind="value: nextMsg"/>
+					<br/>
+					<strong style="font-size:13px;">* Remember to rest 5-10 minutes between goals.</strong>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
       				<input type="button" value="Complete" class="btn btn-primary btn-sm startButton"  data-bind="click: closeReflect"/>
 				</div>
 			  </div>

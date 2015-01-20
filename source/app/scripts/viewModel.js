@@ -11,9 +11,9 @@
 		self.prepMessage = ko.observable("Setup for Success");
 		self.taskTimerValue = ko.observable("??:??");
 		self.didAchieve = ko.observable(false);
-		self.dailyAchieved = ko.observable("00");
-		self.globalAchieved = ko.observable("00");
-		self.globalAttempts = ko.observable("00");
+		self.dailyAchieved = ko.observable(0);
+		self.globalAchieved = ko.observable(0);
+		self.globalAttempts = ko.observable(0);
 		self.nextMsg = ko.observable("");
 
 		self.historyList = ko.observableArray();
@@ -21,6 +21,7 @@
 		self.distractionList = [];
 		self.naturalStop = false;
 		self.radioInit = false;
+		self.terminated = false;
 		
 		self.taskMode = ko.observable(1); // 1 -- Start, 2 - Stop
 
@@ -55,6 +56,7 @@
 				return;
 			}
 
+			self.terminated = false;
 			self.didAchieve(false);
 			self.toggleStartDock();
 			$("#taskTimer").toggleClass("collapse");
@@ -83,16 +85,20 @@
 			var globalStatsObj = self.dataService.fetchGlobalStats();
 			globalStatsObj.attempts += 1;
 
-			// mark today off as sweet ass ;)
-			var obj = globalStatsObj.historyList[today];
-			if(obj !== undefined){
-				obj.attempts += 1;
-			}else{
-				obj = {};
-				obj.attempts = 1;
-				globalStatsObj.historyList[today] = obj;
-			}
 
+			// mark today off as sweet ass ;)
+			if(globalStatsObj.historyList !== undefined){
+				var obj = globalStatsObj.historyList[today];
+				if(obj !== undefined){
+					obj.attempts += 1;
+				}else{
+					obj = {};
+					obj.attempts = 1;
+					globalStatsObj.historyList[today] = obj;
+				}
+
+			}
+			
 			self.dataService.persistGlobalStats(globalStatsObj);
 			console.log("Lifetime Attempts " + globalStatsObj.attempts);
 
@@ -143,9 +149,11 @@
 					self.toggleStartDock();
 				}	
 			}else{
-				setTimeout(function(){
-					self.tickLoop(totalTicks, result);
-				},tick);
+				if(!self.terminated){
+					setTimeout(function(){
+						self.tickLoop(totalTicks, result);
+					},tick);
+				}
 			}
 		};
 		
@@ -244,6 +252,8 @@
 			if(self.naturalStop){
 				self.setLocalNotifiation("Time is up. Please feedback on your task.");
 			}
+
+			self.terminated = true;
 		};
 
 		self.updateAchievedStats = function(){
@@ -255,7 +265,7 @@
 			statsObj.achieved += 1;
 
 			// TODO : Update the current entry with reflect data ;)
-			var statys = "ATTEMPTED";
+			var status = "ATTEMPTED";
 			if(self.didAchieve()){
 				status = "COMPLETED";	
 			}
@@ -267,6 +277,7 @@
 			// update global stats
 			var globalStatsObj = self.dataService.fetchGlobalStats();
 			globalStatsObj.achieved += 1;
+			//globalStatsObj.attempts += 1; // NEW
 
 			// update the daily stats for history
 			if(globalStatsObj.historyList === undefined){
@@ -280,6 +291,7 @@
 			}else{
 				obj = {};
 				obj.achieved = 1;
+				obj.attempts = 0;
 				globalStatsObj.historyList[today] = obj;
 			}
 

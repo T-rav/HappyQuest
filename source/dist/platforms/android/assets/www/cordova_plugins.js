@@ -1,13 +1,6 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
-        "file": "plugins/com.brodysoft.sqlitePlugin/www/SQLitePlugin.js",
-        "id": "com.brodysoft.sqlitePlugin.SQLitePlugin",
-        "clobbers": [
-            "SQLitePlugin"
-        ]
-    },
-    {
         "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification.js",
         "id": "de.appplant.cordova.plugin.local-notification.LocalNotification",
         "clobbers": [
@@ -25,7 +18,6 @@ module.exports = [
 module.exports.metadata = 
 // TOP OF METADATA
 {
-    "com.brodysoft.sqlitePlugin": "1.0.3",
     "de.appplant.cordova.plugin.local-notification": "0.7.6",
     "org.apache.cordova.device": "0.2.14-dev"
 }

@@ -8,6 +8,8 @@
 		self.taskDescription = ko.observable("");
 		self.taskLength = [ "40 Minutes", "50 Minutes", "60 Minutes", "70 Minutes", "80 Minutes", "90 Minutes"];
 		self.selectedLength = ko.observable("50 Minutes");
+		self.selectedStatus = ko.observable("");
+		self.taskStatus = ["Yes","No"];
 		self.prepMessage = ko.observable("Setup for Success");
 		self.taskTimerValue = ko.observable("??:??");
 		self.didAchieve = ko.observable(false);
@@ -21,7 +23,8 @@
 		self.distractionList = [];
 		self.naturalStop = false;
 		self.radioInit = false;
-		
+		self.terminated = false;
+	
 		self.taskMode = ko.observable(1); // 1 -- Start, 2 - Stop
 
 		self.init = function(){
@@ -36,14 +39,32 @@
 			self.globalAchieved(globalStatsObj.achieved);
 			self.globalAttempts(globalStatsObj.attempts);
 			
-			// pump history on start ;)
+			self.buildHistory(globalStatsObj);
+			
+		};
+		
+		self.buildHistory = function(globalStatsObj){
 			var history = globalStatsObj.historyList;
-			var keys = Object.keys(history);
-
-			for(var i = 0 ; i < keys.length; i++){
-				self.historyList().push({"dateOf":keys[i],"attempts" : history[keys[i]].attempts + " - Attempts ","achieved" : history[keys[i]].achieved + " - Achieved"});
+			if(history !== undefined){
+				
+				var keys = Object.keys(history);
+				for(var i = 0 ; i < keys.length; i++){
+					self.historyList().push({"dateOf":keys[i],"attempts" : history[keys[i]].attempts + " - Attempts ","achieved" : history[keys[i]].achieved + " - Achieved"});
+				}
 			}
-
+		};
+		
+		self.updateTodayHistoryEntry = function(globalStatsObj){
+			var today = self.viewService.getToday();
+			
+			var history = globalStatsObj.historyList;
+			if(history !== undefined){
+				var index = self.historyList().length - 1;
+				self.historyList().splice(index, 1);
+				// TODO : Pop last entry, rebuild and push
+				self.historyList().push({"dateOf":today,"attempts" : history[today].attempts + " - Attempts ","achieved" : history[today].achieved + " - Achieved"});
+			}
+			self.historyList.valueHasMutated();
 		};
 
 		self.startTask = function(){
@@ -52,6 +73,7 @@
 				return;
 			}
 
+			self.terminated = false;
 			self.didAchieve(false);
 			self.toggleStartDock();
 			$("#taskTimer").toggleClass("collapse");
@@ -81,13 +103,15 @@
 			globalStatsObj.attempts += 1;
 
 			// mark today off as sweet ass ;)
-			var obj = globalStatsObj.historyList[today];
-			if(obj !== undefined){
-				obj.attempts += 1;
-			}else{
-				obj = {};
-				obj.attempts = 1;
-				globalStatsObj.historyList[today] = obj;
+			if(globalStatsObj.historyList !== undefined){
+				var obj = globalStatsObj.historyList[today];
+				if(obj !== undefined){
+					obj.attempts += 1;
+				}else{
+					obj = {};
+					obj.attempts = 1;
+					globalStatsObj.historyList[today] = obj;
+				}
 			}
 
 			self.dataService.persistGlobalStats(globalStatsObj);
@@ -140,9 +164,11 @@
 					self.toggleStartDock();
 				}	
 			}else{
-				setTimeout(function(){
-					self.tickLoop(totalTicks, result);
-				},tick);
+				if(!self.terminated){
+					setTimeout(function(){
+						self.tickLoop(totalTicks, result);
+					},tick);
+				}
 			}
 		};
 		
@@ -181,12 +207,12 @@
 				msg = "Change clothes, use the toilet, get comfortable.";
 			}else if(item == "food"){
 				msg = "Have a snack, hot or cold drink, prepare your body.";
-			}else if(item == "monolog"){
+			}else if(item == "monologue"){
 				msg = "Acknowledge, discard or defer other thoughts. Focus.";
 			}else if(item == "materials"){
 				msg = "Do you have everything to complete this task?";
 			}else if(item == "environment"){
-				msg = "Noisy, slient or with music, make it ideal for you.";
+				msg = "Noisy, silent or with music, make it ideal for you.";
 			}
 			
 			self.prepMessage(msg);
@@ -241,6 +267,8 @@
 			if(self.naturalStop){
 				self.setLocalNotifiation("Time is up. Please feedback on your task.");
 			}
+
+			self.terminated = true;
 		};
 
 		self.updateAchievedStats = function(){
@@ -249,21 +277,20 @@
 
 			// update daily stats
 			var statsObj = self.dataService.fetchDailyMasterStats(today);
-			statsObj.achieved += 1;
+			// update global stats
+			var globalStatsObj = self.dataService.fetchGlobalStats();
 
 			// TODO : Update the current entry with reflect data ;)
-			var statys = "ATTEMPTED";
-			if(self.didAchieve()){
+			var status = "ATTEMPTED";
+			if(self.selectedStatus() == "Yes"){
 				status = "COMPLETED";	
+				statsObj.achieved += 1;
+				globalStatsObj.achieved += 1;
 			}
 
 			self.dataService.setLastTaskStatus(today, status);
 			self.dataService.persistDailyMasterStats(today, statsObj);
 			console.log("Daily Achieved " + statsObj.achieved);
-
-			// update global stats
-			var globalStatsObj = self.dataService.fetchGlobalStats();
-			globalStatsObj.achieved += 1;
 
 			// update the daily stats for history
 			if(globalStatsObj.historyList === undefined){
@@ -276,10 +303,18 @@
 				obj.achieved += 1;
 			}else{
 				obj = {};
-				obj.achieved = 1;
+				if(self.didAchieve()){
+					obj.achieved = 1;
+				}else{
+					obj.achieved = 0;
+				}
+				obj.attempts = 1;
 				globalStatsObj.historyList[today] = obj;
 			}
 
+			// Update the history data
+			self.updateTodayHistoryEntry(globalStatsObj,self.didAchieve());
+			
 			self.dataService.persistGlobalStats(globalStatsObj);
 			console.log("Lifetime Achieved " + globalStatsObj.achieved);
 
@@ -287,6 +322,7 @@
 			self.dailyAchieved(statsObj.achieved);
 			self.globalAchieved(globalStatsObj.achieved);
 			self.globalAttempts(globalStatsObj.attempts);
+
 		};
 
 		self.setLocalNotifiation = function(msg){
@@ -314,7 +350,11 @@
 
 		self.closeReflect = function(){
 
-			if(!self.validateReflection()){
+			if(self.selectedStatus() === ""){
+				$("#achieveRegion").addClass("redBoarder");
+				return;
+			}else if(self.nextMsg().length < 2){
+				$("#rememberNextTime").addClass("redBoarder");
 				return;
 			}
 
@@ -323,35 +363,12 @@
 			self.toggleStartDock();
 			self.taskDescription("");
 			self.radioInit = false;
-		};
-
-
-		self.validateReflection = function(){
-
-			if(!self.radioInit){
-				$("#achieveRegion").addClass("redBoarder");
-				return false;
-			}else  if(self.nextMsg().length < 2){
-				$("#rememberNextTime").addClass("redBoarder");
-				return false;
-			}
-
-			return true;
-		};
-
-
-		self.IsTrue = ko.computed({
-	        read: function() {
-	            if(self.didAchieve()){
-					return "yes";
-				}
-	        },
-	        write: function(newValue) {
-	        	 self.radioInit = true;
-	             this.didAchieve(newValue === "yes");
-	        },
-       		owner: self        
-    	});      
+			
+			// clear out the feedback form too ;)
+			self.nextMsg("");
+			self.selectedStatus("");
+			
+		};    
 
     	self.sourceIcon = function(link){
 

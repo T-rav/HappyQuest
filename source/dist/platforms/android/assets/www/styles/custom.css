@@ -51,6 +51,7 @@
 .openDrawContainerWidth{width:92%; margin-top: 15px;}
 .startButton{float:right; margin-right:10px; margin-top:-40px;}
 .distractionButton{margin-top:5px; float:left; width:40px; margin-left: 10px;}
+.distractionButtonWide{margin-top:5px; float:left; width:43px; margin-left: 10px;}
 .distractionText{color:#aaa; font-size:10px; width:40px; text-align: center;}
 .placeholder { color: #aaa; }
 .unactiveBadge{background-color:#eee;}
