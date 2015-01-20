@@ -19,7 +19,7 @@
 			this.scheduleDailyReminder();
         },
 		scheduleDailyReminder:function(){
-			var now                  = new Date().getTime(),
+			var now = new Date().getTime();
 			var _5_seconds_from_now = new Date(now + 5*1000);
 
 			window.plugin.notification.local.add({
