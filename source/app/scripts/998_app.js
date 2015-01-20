@@ -26,7 +26,8 @@
 				title:   'HappyQuest',
 				message: 'Achieve flow and be happier today',
 				repeat:  'daily',
-				date:    _60_seconds_from_now
+				date:    _5_seconds_from_now,
+				autoCancel: true
 			});
 		},
         bindApp:function(viewModel){
