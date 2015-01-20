@@ -24,6 +24,7 @@
 			tomorrowAt9am.setHours(9);
 
 			window.plugin.notification.local.add({
+				id: 1,
 				title:   'HappyQuest',
 				message: 'Achieve flow and be happier today',
 				repeat:  'daily',
