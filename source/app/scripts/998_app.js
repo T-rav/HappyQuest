@@ -19,8 +19,9 @@
 			this.scheduleDailyReminder();
         },
 		scheduleDailyReminder:function(){
-			var now = new Date().getTime();
-			var tomorrowAt9am = new Date(now.getFullYear(),now.getMonth(),now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds()+5);
+			var tomorrowAt9am = new Date();
+			tomorrowAt9am.setMinutes(0);
+			tomorrowAt9am.setHours(9);
 
 			window.plugin.notification.local.add({
 				title:   'HappyQuest',
