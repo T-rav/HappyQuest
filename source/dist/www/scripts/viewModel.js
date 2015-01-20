@@ -16,7 +16,9 @@
 		self.dailyAchieved = ko.observable("00");
 		self.globalAchieved = ko.observable("00");
 		self.globalAttempts = ko.observable("00");
-		self.nextMsg = ko.observable("");
+		self.whatWorked = ko.observable("");
+		self.didNotWork = ko.observable("");
+		self.doDifferently = ko.observable("");
 
 		self.historyList = ko.observableArray();
 
@@ -353,9 +355,29 @@
 			if(self.selectedStatus() === ""){
 				$("#achieveRegion").addClass("redBoarder");
 				return;
-			}else if(self.nextMsg().length < 2){
-				$("#rememberNextTime").addClass("redBoarder");
+			}else{
+				$("#achieveRegion").removeClass("redBoarder");
+			}
+			
+			if(self.whatWorked().length < 2){
+				$("#whatWorked").addClass("redBoarder");
 				return;
+			}else{
+				$("#whatWorked").removeClass("redBoarder");
+			}
+			
+			if(self.didNotWork().length < 2){
+				$("#didNotWork").addClass("redBoarder");
+				return;
+			}else{
+				$("#didNotWork").removeClass("redBoarder");
+			}
+			
+			if(self.doDifferently().length < 2){
+				$("#doDifferently").addClass("redBoarder");
+				return;
+			}else{
+				$("#doDifferently").removeClass("redBoarder");
 			}
 
 			self.updateAchievedStats();
@@ -365,7 +387,9 @@
 			self.radioInit = false;
 			
 			// clear out the feedback form too ;)
-			self.nextMsg("");
+			self.whatWorked("");
+			self.didNotWork("");
+			self.doDifferently("");
 			self.selectedStatus("");
 			
 		};    
@@ -373,10 +397,6 @@
     	self.sourceIcon = function(link){
 
 			var value = link.toLowerCase();
-			// cryptocoinsnews
-			// CoinDesk
-			// BitcoinMagazine
-			// Generic
 
 			var img = "images/rewards/";
 

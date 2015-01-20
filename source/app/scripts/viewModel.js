@@ -8,13 +8,17 @@
 		self.taskDescription = ko.observable("");
 		self.taskLength = [ "40 Minutes", "50 Minutes", "60 Minutes", "70 Minutes", "80 Minutes", "90 Minutes"];
 		self.selectedLength = ko.observable("50 Minutes");
+		self.selectedStatus = ko.observable("");
+		self.taskStatus = ["Yes","No"];
 		self.prepMessage = ko.observable("Setup for Success");
 		self.taskTimerValue = ko.observable("??:??");
 		self.didAchieve = ko.observable(false);
-		self.dailyAchieved = ko.observable(0);
-		self.globalAchieved = ko.observable(0);
-		self.globalAttempts = ko.observable(0);
-		self.nextMsg = ko.observable("");
+		self.dailyAchieved = ko.observable("00");
+		self.globalAchieved = ko.observable("00");
+		self.globalAttempts = ko.observable("00");
+		self.whatWorked = ko.observable("");
+		self.didNotWork = ko.observable("");
+		self.doDifferently = ko.observable("");
 
 		self.historyList = ko.observableArray();
 
@@ -22,7 +26,7 @@
 		self.naturalStop = false;
 		self.radioInit = false;
 		self.terminated = false;
-		
+	
 		self.taskMode = ko.observable(1); // 1 -- Start, 2 - Stop
 
 		self.init = function(){
@@ -37,17 +41,32 @@
 			self.globalAchieved(globalStatsObj.achieved);
 			self.globalAttempts(globalStatsObj.attempts);
 			
-			// pump history on start ;)
+			self.buildHistory(globalStatsObj);
+			
+		};
+		
+		self.buildHistory = function(globalStatsObj){
 			var history = globalStatsObj.historyList;
-
 			if(history !== undefined){
+				
 				var keys = Object.keys(history);
-
 				for(var i = 0 ; i < keys.length; i++){
 					self.historyList().push({"dateOf":keys[i],"attempts" : history[keys[i]].attempts + " - Attempts ","achieved" : history[keys[i]].achieved + " - Achieved"});
 				}
 			}
-
+		};
+		
+		self.updateTodayHistoryEntry = function(globalStatsObj){
+			var today = self.viewService.getToday();
+			
+			var history = globalStatsObj.historyList;
+			if(history !== undefined){
+				var index = self.historyList().length - 1;
+				self.historyList().splice(index, 1);
+				// TODO : Pop last entry, rebuild and push
+				self.historyList().push({"dateOf":today,"attempts" : history[today].attempts + " - Attempts ","achieved" : history[today].achieved + " - Achieved"});
+			}
+			self.historyList.valueHasMutated();
 		};
 
 		self.startTask = function(){
@@ -85,7 +104,6 @@
 			var globalStatsObj = self.dataService.fetchGlobalStats();
 			globalStatsObj.attempts += 1;
 
-
 			// mark today off as sweet ass ;)
 			if(globalStatsObj.historyList !== undefined){
 				var obj = globalStatsObj.historyList[today];
@@ -96,9 +114,8 @@
 					obj.attempts = 1;
 					globalStatsObj.historyList[today] = obj;
 				}
-
 			}
-			
+
 			self.dataService.persistGlobalStats(globalStatsObj);
 			console.log("Lifetime Attempts " + globalStatsObj.attempts);
 
@@ -192,12 +209,12 @@
 				msg = "Change clothes, use the toilet, get comfortable.";
 			}else if(item == "food"){
 				msg = "Have a snack, hot or cold drink, prepare your body.";
-			}else if(item == "monolog"){
+			}else if(item == "monologue"){
 				msg = "Acknowledge, discard or defer other thoughts. Focus.";
 			}else if(item == "materials"){
 				msg = "Do you have everything to complete this task?";
 			}else if(item == "environment"){
-				msg = "Noisy, slient or with music, make it ideal for you.";
+				msg = "Noisy, silent or with music, make it ideal for you.";
 			}
 			
 			self.prepMessage(msg);
@@ -262,22 +279,20 @@
 
 			// update daily stats
 			var statsObj = self.dataService.fetchDailyMasterStats(today);
-			statsObj.achieved += 1;
+			// update global stats
+			var globalStatsObj = self.dataService.fetchGlobalStats();
 
 			// TODO : Update the current entry with reflect data ;)
 			var status = "ATTEMPTED";
-			if(self.didAchieve()){
+			if(self.selectedStatus() == "Yes"){
 				status = "COMPLETED";	
+				statsObj.achieved += 1;
+				globalStatsObj.achieved += 1;
 			}
 
 			self.dataService.setLastTaskStatus(today, status);
 			self.dataService.persistDailyMasterStats(today, statsObj);
 			console.log("Daily Achieved " + statsObj.achieved);
-
-			// update global stats
-			var globalStatsObj = self.dataService.fetchGlobalStats();
-			globalStatsObj.achieved += 1;
-			//globalStatsObj.attempts += 1; // NEW
 
 			// update the daily stats for history
 			if(globalStatsObj.historyList === undefined){
@@ -290,11 +305,18 @@
 				obj.achieved += 1;
 			}else{
 				obj = {};
-				obj.achieved = 1;
-				obj.attempts = 0;
+				if(self.didAchieve()){
+					obj.achieved = 1;
+				}else{
+					obj.achieved = 0;
+				}
+				obj.attempts = 1;
 				globalStatsObj.historyList[today] = obj;
 			}
 
+			// Update the history data
+			self.updateTodayHistoryEntry(globalStatsObj,self.didAchieve());
+			
 			self.dataService.persistGlobalStats(globalStatsObj);
 			console.log("Lifetime Achieved " + globalStatsObj.achieved);
 
@@ -302,6 +324,7 @@
 			self.dailyAchieved(statsObj.achieved);
 			self.globalAchieved(globalStatsObj.achieved);
 			self.globalAttempts(globalStatsObj.attempts);
+
 		};
 
 		self.setLocalNotifiation = function(msg){
@@ -329,8 +352,32 @@
 
 		self.closeReflect = function(){
 
-			if(!self.validateReflection()){
+			if(self.selectedStatus() === ""){
+				$("#achieveRegion").addClass("redBoarder");
 				return;
+			}else{
+				$("#achieveRegion").removeClass("redBoarder");
+			}
+			
+			if(self.whatWorked().length < 2){
+				$("#whatWorked").addClass("redBoarder");
+				return;
+			}else{
+				$("#whatWorked").removeClass("redBoarder");
+			}
+			
+			if(self.didNotWork().length < 2){
+				$("#didNotWork").addClass("redBoarder");
+				return;
+			}else{
+				$("#didNotWork").removeClass("redBoarder");
+			}
+			
+			if(self.doDifferently().length < 2){
+				$("#doDifferently").addClass("redBoarder");
+				return;
+			}else{
+				$("#doDifferently").removeClass("redBoarder");
 			}
 
 			self.updateAchievedStats();
@@ -338,43 +385,18 @@
 			self.toggleStartDock();
 			self.taskDescription("");
 			self.radioInit = false;
-		};
-
-
-		self.validateReflection = function(){
-
-			if(!self.radioInit){
-				$("#achieveRegion").addClass("redBoarder");
-				return false;
-			}else  if(self.nextMsg().length < 2){
-				$("#rememberNextTime").addClass("redBoarder");
-				return false;
-			}
-
-			return true;
-		};
-
-
-		self.IsTrue = ko.computed({
-	        read: function() {
-	            if(self.didAchieve()){
-					return "yes";
-				}
-	        },
-	        write: function(newValue) {
-	        	 self.radioInit = true;
-	             this.didAchieve(newValue === "yes");
-	        },
-       		owner: self        
-    	});      
+			
+			// clear out the feedback form too ;)
+			self.whatWorked("");
+			self.didNotWork("");
+			self.doDifferently("");
+			self.selectedStatus("");
+			
+		};    
 
     	self.sourceIcon = function(link){
 
 			var value = link.toLowerCase();
-			// cryptocoinsnews
-			// CoinDesk
-			// BitcoinMagazine
-			// Generic
 
 			var img = "images/rewards/";
 
