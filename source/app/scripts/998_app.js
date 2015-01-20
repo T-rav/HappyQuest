@@ -20,13 +20,13 @@
         },
 		scheduleDailyReminder:function(){
 			var now = new Date().getTime();
-			var _5_seconds_from_now = new Date(now + 5*1000);
+			var tomorrowAt9am = new Date(now.getFullYear(),now.getMonth(),now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds()+5);
 
 			window.plugin.notification.local.add({
 				title:   'HappyQuest',
 				message: 'Achieve flow and be happier today',
 				repeat:  'daily',
-				date:    _5_seconds_from_now,
+				date:    tomorrowAt9am,
 				autoCancel: true
 			});
 		},
