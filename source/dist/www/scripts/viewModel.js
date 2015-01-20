@@ -329,7 +329,7 @@
 
 		self.setLocalNotifiation = function(msg){
 			try{
-				window.plugin.notification.local.add({ message: msg });
+				window.plugin.notification.local.add({ message: msg, autoCancel: true });
 			}catch(e){
 				alert("Error : " + e);
 			}

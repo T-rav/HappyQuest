@@ -8,9 +8,6 @@
 	
     var app = {
         init: function() {
-
-			var waitTime = 600000;
-            //var waitTime = 10000;
 		
             this.fixBottomMenuItemsForSmallerScreens();
             var dataService = new DataService();
@@ -19,15 +16,19 @@
 
             this.bindApp(viewModel);
 			
-			this.activateMonitor(viewModel, waitTime);
+			this.scheduleDailyReminder();
         },
-		activateMonitor: function(viewModel, waitTime){
-			// refresh status
-			setInterval(function(){viewModel.polledRefresh();}, waitTime);
+		scheduleDailyReminder:function(){
+			var now                  = new Date().getTime(),
+			var _5_seconds_from_now = new Date(now + 5*1000);
+
+			window.plugin.notification.local.add({
+				title:   'HappyQuest',
+				message: 'Achieve flow and be happier today',
+				repeat:  'daily',
+				date:    _60_seconds_from_now
+			});
 		},
-        fetchStatus:function(viewService, viewModel){
-            viewService.fetchData(viewModel, false);
-        },
         bindApp:function(viewModel){
             
             viewModel.init();
