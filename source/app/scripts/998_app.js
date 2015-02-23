@@ -33,9 +33,9 @@
             
             viewModel.init();
 
-            // -- main
             ko.applyBindings(viewModel, document.getElementById("main"));
             ko.applyBindings(viewModel, document.getElementById("aboutApp"));
+			ko.applyBindings(viewModel, document.getElementById("tipsScreen"));
 
         },
         fixBottomMenuItemsForSmallerScreens: function() {

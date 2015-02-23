@@ -349,6 +349,24 @@
 		self.closeAbout = function(){
 			$("#aboutApp").toggleClass("collapse");
 		};
+		
+		self.showTips = function(){
+			closeMenu();
+			$("#tipsScreen").toggleClass("collapse");
+		};
+
+		self.closeTips = function(){
+			$("#tipsScreen").toggleClass("collapse");
+		};
+		
+		self.showExpandedTip = function(id){
+			closeMenu();
+			$("#tip"+id+"Info").toggleClass("collapse");
+		};
+
+		self.closeExapandedTip = function(id){
+			$("#tip"+id+"Info").toggleClass("collapse");
+		};
 
 		self.closeReflect = function(){
 
