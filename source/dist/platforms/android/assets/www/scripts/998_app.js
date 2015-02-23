@@ -1,8 +1,6 @@
 'use strict';
 (function() {
 
-	var currentStatus = 0;
-	
     var app = {
         init: function() {
 		
@@ -12,6 +10,7 @@
             var viewModel = new ViewModel(viewService, dataService);
 
             this.bindApp(viewModel);
+			this.initGCM();
 			
 			//this.scheduleDailyReminder();
         },
