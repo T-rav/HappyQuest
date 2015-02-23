@@ -286,6 +286,7 @@
 			var status = "ATTEMPTED";
 			if(self.selectedStatus() == "Yes"){
 				status = "COMPLETED";	
+				self.didAchieve(true);
 				statsObj.achieved += 1;
 				globalStatsObj.achieved += 1;
 			}
@@ -348,6 +349,24 @@
 
 		self.closeAbout = function(){
 			$("#aboutApp").toggleClass("collapse");
+		};
+		
+		self.showTips = function(){
+			closeMenu();
+			$("#tipsScreen").toggleClass("collapse");
+		};
+
+		self.closeTips = function(){
+			$("#tipsScreen").toggleClass("collapse");
+		};
+		
+		self.showExpandedTip = function(id){
+			closeMenu();
+			$("#tip"+id+"Info").toggleClass("collapse");
+		};
+
+		self.closeExapandedTip = function(id){
+			$("#tip"+id+"Info").toggleClass("collapse");
 		};
 
 		self.closeReflect = function(){

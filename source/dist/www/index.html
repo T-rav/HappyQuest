@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="An application to monitor the Eskom loadsheding status">
+    <meta name="description" content="An application to increase focus and flow">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Happy Quest</title>
 
@@ -52,13 +52,19 @@
 			 <div id="about">
 				<div class="navbar-header">
 					<h4 id="aboutId" class="navbar-brand" data-bind="click: showAbout">
-						<!-- data-toggle="collapse" data-target="#info" -->
-						<!-- data-bind="click: showAbout" -->
 						<b>About</b>
 					</h4>
 				</div>
 			</div>
 
+			<div id="tips">
+				<div class="navbar-header">
+					<h4 id="focusId" class="navbar-brand" data-bind="click: showTips">
+						<b>Focus Tips</b>
+					</h4>
+				</div>
+			</div>
+			
 			<div id="feedback">
 				<div class="navbar-header">
 					<h4 id="feedbackId" class="navbar-brand" data-bind="click: openFeedback">
@@ -289,9 +295,9 @@
 			<hr/>
 		</header>
 		<div style="margin-left:5%; width:90%;">
-			<strong>HappyQuest</strong> is built on the blief that getting into <strong>flow is first and formost for happiness and success.</strong>
+			<strong>HappyQuest</strong> is built on the belief that getting into <strong>flow is first and foremost for happiness and success.</strong>
 			<br/><br/>
-			A simple three step process is used to setup for success. First, clear your heart, body and enviroment of distractions.
+			A simple three step process is used to set-up for success. First, clear your heart, body and environment of distractions.
 			Next, identify the goal you want to achieve.
 			Finally, specify how long it will take, 40 - 90 minutes, and go.
 			<br/><br/>
@@ -302,7 +308,104 @@
 			Developed by <strong>StoneAge</strong> technologies. 
 		</div>
     </div>
-		
+	
+	<div id="tipsScreen" class="settings-container collapse">
+		<header class="app-bar promote-layer marketHeadline">
+			<br/>
+			<h4 data-bind="click: closeTips">
+				<span><img src="images/chevron.svg" height="25" width="20" /></span> 
+				<strong>Focus</strong> Tips
+			</h4>
+			<hr/>
+		</header>
+		<div class="tipRegion">
+			<h5>
+				&nbsp; &nbsp;<i>Click on a tip to view it's detail.</i>
+				<!-- http://blog.highperformancelifestyle.net/eliminate-distractions/ -->
+			</h5>
+			<table class="table table-striped">
+			  <tbody>
+				<tr data-bind="click: function(){showExpandedTip('1');}" style="background-color:#95a5a6; color:#fff;">
+					<td>
+						<i class="fa fa-comments-o"></i> &nbsp; <b>Kill instant notifications</b> 
+					</td>
+				</tr>
+				<tr id="tip1Info" class="collapse" data-bind="click: function(){closeExapandedTip('1');}">
+					<td>
+					Close out from Skype (or put on Do Not Disturb mode), email clients, social media sites and any chat programs. 
+					<br/><br/>
+					If you need a piece of information from someone for the particular work you are doing, get it beforehand and close that communication channel while you work.
+					</td>
+				</tr>
+				<tr data-bind="click: function(){showExpandedTip('2');}">
+					<td>
+						<i class="fa fa-university"></i> &nbsp; <b>"Train" other people<b/>
+					</td>
+				</tr>
+				<tr id="tip2Info" class="collapse" data-bind="click: function(){closeExapandedTip('2');}">
+					<td>
+					A lot of the distractions and interruptions in life come from the people around you. Be it colleagues, family, friends, neighbours and even pets.
+					<br/><br/>
+					The best way to prevent them from happening is to set some ground rules and clearly communicate them to everyone.
+					<br/><br/>
+					Politely explain that you prefer to work in chunks of uninterrupted time and you would appreciate it if they respect your focus by minimizing all communication with you during those blocks of time.
+					<br/><br/>
+					It also helps to explain that both parties are better off of you give them your undivided attention during one of your breaks, than to give them only half (or less) if they interrupt what you are currently doing.
+					<br/><br/>
+					Figure out some sort of a Do Not Disturb (DND) sign. This will tell people when you are "in flow" and when it is OK to come talk to you.
+					<br/><br/>
+					The DND sign can be a closed door to the office (if you have one), putting on headphones or anything that makes sense to you.
+					<br/><br/>
+					Just make sure you communicate to the outside world the meaning of this gesture.
+					</td>
+				</tr>
+				<tr data-bind="click: function(){showExpandedTip('3');}" style="background-color:#95a5a6; color:#fff;">
+					<td>
+						<i class="fa fa-archive"></i> &nbsp;  <b>Clear visual clutter</b>
+					</td>
+				</tr>
+				<tr id="tip3Info" class="collapse" data-bind="click: function(){closeExapandedTip('3');}">
+					<td>
+					Clear your desk, and especially your notes.
+					<br/><br/>
+					Clear the walls and shelves around you from anything that can be a distraction by randomly grabbing your attention while you are focusing on something else.
+					</td>
+				</tr>
+				<tr data-bind="click: function(){showExpandedTip('4');}">
+					<td>
+						<i class="fa fa-headphones"></i> &nbsp;  <b>Use headphones</b>
+					</td>
+				</tr>
+				<tr id="tip4Info" class="collapse" data-bind="click: function(){closeExapandedTip('4');}">
+					<td>
+					Often times, you will need to work in a noise environment.
+					<br/><br/>
+					Noise such as traffic and construction to noisy neighbours and chatty co-workers, any noise can be very distracting.
+					<br/><br/>
+					A good remedy is to use headphones and listen to music.
+					<br/><br/>
+					Headphones make a very good Do Not Disturb sign so even if you do not listen to anything you can signal to others you are in flow.
+					</td>
+				</tr>
+				<tr data-bind="click: function(){showExpandedTip('5');}" style="background-color:#95a5a6; color:#fff;">
+					<td>
+						<i class="fa fa-clock-o"></i> &nbsp;  <b>Turn off your clock</b>
+					</td>
+				</tr>
+				<tr id="tip5Info" class="collapse" data-bind="click: function(){closeExapandedTip('5');}">
+					<td>
+					Being constantly aware of what time it is can be a major distractions.
+					<br/><br/>
+					Especially, if you have limited time to do something, watching the minutes pass by can be very stressful as well.
+					<br/><br/>
+					Eliminating time from the equation will allow you to concentrate on getting the job done, not on how much time it takes to do it.
+					</td>
+				</tr>
+			  </tbody>
+		   </table>
+		</div>
+    </div>
+	
 	<!-- Deps Imports -->
 	<script src="cordova.js"></script>
 	<script src="libs/jquery.js"></script>

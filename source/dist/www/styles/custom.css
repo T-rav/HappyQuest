@@ -58,3 +58,11 @@
 .activeBadge{background-color:#abb8b9;}
 .distractionRegion{width:98%; height:65px; background-color:#fff;}
 .redBoarder{border: 1px solid #e74c3c;}
+.tipRegion{height:85%; overflow:scroll;}
+
+@media screen and (max-width: 500px) {
+	.main-container{box-sizing:content-box;position:relative;padding-left:5px;padding-right:5px;margin-left:auto;margin-right:auto;margin-bottom:10px; overflow-x:hidden;}
+}
+@media screen and (min-width: 501px) {
+	.main-container{box-sizing:content-box;position:relative;padding-left:25px;padding-right:25px;margin-left:auto;margin-right:auto;margin-bottom:10px; overflow-x:hidden;}
+}

@@ -1,16 +1,10 @@
 'use strict';
 (function() {
-    
-    // example usage:
-    // webHelper.openUrl("http://www.google.com")
 
 	var currentStatus = 0;
 	
     var app = {
         init: function() {
-
-			var waitTime = 600000;
-            //var waitTime = 10000;
 		
             this.fixBottomMenuItemsForSmallerScreens();
             var dataService = new DataService();
@@ -19,22 +13,29 @@
 
             this.bindApp(viewModel);
 			
-			this.activateMonitor(viewModel, waitTime);
+			//this.scheduleDailyReminder();
         },
-		activateMonitor: function(viewModel, waitTime){
-			// refresh status
-			setInterval(function(){viewModel.polledRefresh();}, waitTime);
+		scheduleDailyReminder:function(){
+			var tomorrowAt9am = new Date();
+			tomorrowAt9am.setMinutes(0);
+			tomorrowAt9am.setHours(9);
+
+			window.plugin.notification.local.add({
+				id: 1,
+				title:   'HappyQuest',
+				message: 'Achieve flow and be happier today',
+				repeat:  'daily',
+				date:    tomorrowAt9am,
+				autoCancel: true
+			});
 		},
-        fetchStatus:function(viewService, viewModel){
-            viewService.fetchData(viewModel, false);
-        },
         bindApp:function(viewModel){
             
             viewModel.init();
 
-            // -- main
             ko.applyBindings(viewModel, document.getElementById("main"));
             ko.applyBindings(viewModel, document.getElementById("aboutApp"));
+			ko.applyBindings(viewModel, document.getElementById("tipsScreen"));
 
         },
         fixBottomMenuItemsForSmallerScreens: function() {
@@ -49,27 +50,31 @@
             if (bottomListTop <= lastItemBottom) {
                 bottomList.css("position", "relative");
             }
-        }
-		/*
-		registerPushNotificationHandler: function(){
-			try{
-				var pushNotification window.plugins.pushNotification; 
-				pushNotification.register(
-					function(result){
-						window.plugin.notification.local.add({ message: 'Great app! '+result});
-					},
-					function(error){
-						alert('error='+error);
-					},
-					{
-						"senderID":"wise-program-789",
-						"ecb":"onNotification"
-					}
-				);
-			}catch(e){
-				alert(e);
-			}
-		}*/
+        },
+		initGCM:function()
+		{
+			var GOOGLE_PROJECT_ID = "914619978947";
+			var PUSHAPPS_APP_TOKEN = "c258fa45-4394-4dfe-a82e-b3ce51d20198";
+		
+			PushNotification.registerDevice(GOOGLE_PROJECT_ID, PUSHAPPS_APP_TOKEN, function (pushToken) {
+												console.log('registerDevice, push token' + pushToken);
+											}, function (error) {
+												alert(error);
+											});
+		
+			document.removeEventListener('pushapps.message-received');
+			document.addEventListener('pushapps.message-received', function(event) {
+										  var notification = event.notification;
+										  
+										  var devicePlatform = device.platform;
+										  if (devicePlatform === "iOS") {
+											console.log("message-received, Message: " + notification.aps.alert + " , D: " + notification.D);
+										  } else {
+											console.log("message-received, Message: " + notification.Message + " , Title: " + notification.Title + " , D: " + notification.D);
+										  }
+									  });
+		
+		}
     };
 
     document.addEventListener('deviceready', function() {

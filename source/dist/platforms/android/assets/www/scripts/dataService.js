@@ -58,6 +58,10 @@ function DataService(){
 			entry.attempts = 0;
 			entry.achieved = 0;
 		}
+					
+		if(isNaN(entry.attempts)){
+			entry.attempts = 0;
+		}
 
 		return entry;
 	};
