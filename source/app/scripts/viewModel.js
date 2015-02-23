@@ -286,6 +286,7 @@
 			var status = "ATTEMPTED";
 			if(self.selectedStatus() == "Yes"){
 				status = "COMPLETED";	
+				self.didAchieve(true);
 				statsObj.achieved += 1;
 				globalStatsObj.achieved += 1;
 			}
