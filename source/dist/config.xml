@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="cnom.stoneagetechnologies.happyquest" version="1.0.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Happy Quest</name>
+    <name>HappyQuest</name>
     <description>
         A task management framework used to maximum flow resulting in increased productivity 
     </description>
