@@ -1,8 +1,5 @@
 'use strict';
 (function() {
-    
-    // example usage:
-    // webHelper.openUrl("http://www.google.com")
 
 	var currentStatus = 0;
 	
