@@ -16,4 +16,8 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
+    <feature name="PushAppsPlugin">
+        <param name="android-package" value="com.pushapps.phonegap.PushAppsPlugin" />
+        <param name="onload" value="true" />
+    </feature>
 </widget>

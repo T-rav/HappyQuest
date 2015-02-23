@@ -16,7 +16,7 @@
 
             this.bindApp(viewModel);
 			
-			this.scheduleDailyReminder();
+			//this.scheduleDailyReminder();
         },
 		scheduleDailyReminder:function(){
 			var tomorrowAt9am = new Date();
@@ -53,27 +53,31 @@
             if (bottomListTop <= lastItemBottom) {
                 bottomList.css("position", "relative");
             }
-        }
-		/*
-		registerPushNotificationHandler: function(){
-			try{
-				var pushNotification window.plugins.pushNotification; 
-				pushNotification.register(
-					function(result){
-						window.plugin.notification.local.add({ message: 'Great app! '+result});
-					},
-					function(error){
-						alert('error='+error);
-					},
-					{
-						"senderID":"wise-program-789",
-						"ecb":"onNotification"
-					}
-				);
-			}catch(e){
-				alert(e);
-			}
-		}*/
+        },
+		initGCM:function()
+		{
+			var GOOGLE_PROJECT_ID = "914619978947";
+			var PUSHAPPS_APP_TOKEN = "c258fa45-4394-4dfe-a82e-b3ce51d20198";
+		
+			PushNotification.registerDevice(GOOGLE_PROJECT_ID, PUSHAPPS_APP_TOKEN, function (pushToken) {
+												console.log('registerDevice, push token' + pushToken);
+											}, function (error) {
+												alert(error);
+											});
+		
+			document.removeEventListener('pushapps.message-received');
+			document.addEventListener('pushapps.message-received', function(event) {
+										  var notification = event.notification;
+										  
+										  var devicePlatform = device.platform;
+										  if (devicePlatform === "iOS") {
+											console.log("message-received, Message: " + notification.aps.alert + " , D: " + notification.D);
+										  } else {
+											console.log("message-received, Message: " + notification.Message + " , Title: " + notification.Title + " , D: " + notification.D);
+										  }
+									  });
+		
+		}
     };
 
     document.addEventListener('deviceready', function() {
