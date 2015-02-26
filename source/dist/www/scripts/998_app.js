@@ -11,9 +11,15 @@
 
             this.bindApp(viewModel);
 			this.initGCM();
+			this.cancelDailyReminder();
 			
 			//this.scheduleDailyReminder();
         },
+		cancelDailyReminder:function(){
+			window.plugin.notification.local.cancel(1, function () {
+				console.log("Canceled");
+			});
+		},
 		scheduleDailyReminder:function(){
 			var tomorrowAt9am = new Date();
 			tomorrowAt9am.setMinutes(0);
